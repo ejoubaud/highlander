@@ -16,14 +16,6 @@ GIT
   specs:
     rails_log_stdout (0.0.1)
 
-GIT
-  remote: git://github.com/smartinez87/exception_notification.git
-  revision: 5ee8cac707b9a3d580f388bf5e22e673ac57562e
-  specs:
-    exception_notification (3.0.1)
-      actionmailer (>= 3.0.4)
-      activesupport (>= 3.0.4)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -91,8 +83,6 @@ GEM
     debugger-ruby_core_source (1.2.2)
     dictionary (1.0.0)
     diff-lcs (1.2.4)
-    domain_name (0.5.11)
-      unf (>= 0.0.5, < 1.0.0)
     draper (1.2.1)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
@@ -111,11 +101,8 @@ GEM
       railties (>= 3.0.0)
     faraday (0.8.7)
       multipart-post (~> 1.1)
-    faraday_middleware (0.9.0)
-      faraday (>= 0.7.4, < 0.9)
     ffi (1.8.1)
     hashie (2.0.5)
-    high_voltage (1.2.2)
     hike (1.2.3)
     i18n (0.6.4)
     jbuilder (1.0.2)
@@ -130,14 +117,6 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
-    mechanize (2.6.0)
-      domain_name (~> 0.5, >= 0.5.1)
-      mime-types (~> 1.17, >= 1.17.2)
-      net-http-digest_auth (~> 1.1, >= 1.1.1)
-      net-http-persistent (~> 2.5, >= 2.5.2)
-      nokogiri (~> 1.4)
-      ntlm-http (~> 0.1, >= 0.1.1)
-      webrobots (>= 0.0.9, < 0.2)
     method_source (0.8.1)
     mime-types (1.23)
     minitest (4.7.4)
@@ -147,19 +126,8 @@ GEM
     neat (1.3.0)
       bourbon (>= 2.1)
       sass (>= 3.2)
-    net-http-digest_auth (1.3)
-    net-http-persistent (2.8)
-    netrc (0.7.7)
     nokogiri (1.5.9)
     normalize-rails (2.1.1)
-    ntlm-http (0.1.1)
-    octokit (1.24.0)
-      addressable (~> 2.2)
-      faraday (~> 0.8)
-      faraday_middleware (~> 0.9)
-      hashie (~> 2.0)
-      multi_json (~> 1.3)
-      netrc (~> 0.7.7)
     omniauth (1.1.4)
       hashie (>= 1.2, < 3)
       rack
@@ -265,11 +233,7 @@ GEM
     uglifier (2.1.0)
       execjs (>= 0.3.0)
       multi_json (~> 1.0, >= 1.0.2)
-    unf (0.1.1)
-      unf_ext
-    unf_ext (0.0.6)
     unshorten (0.2.1)
-    webrobots (0.1.1)
     xpath (2.0.0)
       nokogiri (~> 1.3)
 
@@ -286,18 +250,14 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   data_migration!
   draper
-  exception_notification!
   factory_girl_rails
   hashie
-  high_voltage
   jbuilder (~> 1.0.1)
   jquery-rails
   letter_opener
-  mechanize
   naught
   neat
   normalize-rails
-  octokit
   omniauth-google-apps
   pg
   pry

@@ -16,13 +16,13 @@ feature 'Twitter Mentions' do
     {
       metric:           twitter_mention_metric.name,
       tweet_id:         860860860,
-      text:             'I just mentioned @Hooroo in a tweet! #YOLO',
+      text:             'I just mentioned @example in a tweet! #YOLO',
       twitter_username: twitter_service.username,
       followers_count:  155
     }
   end
 
-  describe 'First @Hooroo mention' do
+  describe 'First @example mention' do
 
     background { page.driver.post endpoint, valid_params }
 
@@ -36,7 +36,7 @@ feature 'Twitter Mentions' do
     end
   end
 
-  describe 'Multiple @Hooroo mentions' do
+  describe 'Multiple @example mentions' do
 
     background do
       page.driver.post endpoint, valid_params.merge(tweet_id: 1)

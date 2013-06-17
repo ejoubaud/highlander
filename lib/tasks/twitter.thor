@@ -4,7 +4,7 @@ require 'ostruct'
 
 class TwitterIntegration < Thor
 
-  desc 'scan_for_mentions', 'scans twitter for mentions of Hooroo'
+  desc 'scan_for_mentions', 'scans Twitter for mentions'
   def scan_for_mentions(env, consumer_key, consumer_secret, oauth_token, oauth_token_secret)
     @env = env
 
@@ -39,11 +39,11 @@ class TwitterIntegration < Thor
   end
 
   def host
-    development? ? 'localhost' : 'leaderboard.hooroo.com'
+    'localhost'
   end
 
   def port
-    development? ? 3000 : 80
+    3000
   end
 
   def tweets

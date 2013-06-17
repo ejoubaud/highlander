@@ -4,6 +4,7 @@ class CreateMetrics < ActiveRecord::Migration
       t.string :name
       t.string :description
       t.integer :default_unit, default: 1
+      t.boolean :enabled, default: true
 
       t.timestamps
     end

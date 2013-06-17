@@ -2,6 +2,7 @@ class CreateBounties < ActiveRecord::Migration
   def change
     create_table :bounties do |t|
       t.string :name, null: false
+      t.string :slug
       t.text :description, null: false
       t.integer :reward, default: 5
       t.integer :created_by_id, null: false
@@ -11,5 +12,7 @@ class CreateBounties < ActiveRecord::Migration
 
       t.timestamps
     end
+
+    add_index :bounties, :slug, unique: true
   end
 end

@@ -13,7 +13,8 @@ module PayloadAdapters
     end
 
     def high_value?
-      links_to_hooro?
+      # NOTE: perform your own logic here
+      false
     end
 
     def shortened_link_matcher
@@ -23,11 +24,6 @@ module PayloadAdapters
     private
 
     attr_reader :content
-
-    # TODO: this needs to be managed outside of code. Refs to Hooroo != good
-    def links_to_hooro?
-      unshortened_content.downcase.include? 'hooroo.com'
-    end
 
     def unshortened_content
       @unshortened_content ||= begin

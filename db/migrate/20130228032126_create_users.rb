@@ -4,15 +4,17 @@ class CreateUsers < ActiveRecord::Migration
       t.string  :name
       t.string  :slug
       t.string  :email
-      t.integer :total_score, default: 0
       t.string  :emails, array: true, default: '{}'
       t.string  :bio, limit: 128
-      t.string  :preferred_email
+      t.string  :avatar_url
+      t.string  :role, default: 'guest'
       t.boolean :enabled, default: true
       t.boolean :earns_points, default: true
-      t.string  :twitter_username
+      t.boolean :leaderboarder, default: true
 
       t.timestamps
     end
+
+    add_index :users, :slug, unique: true
   end
 end

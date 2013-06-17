@@ -15,23 +15,23 @@ describe PayloadAdapters::TweetContent do
 
   describe '#high_value?' do
 
-    context 'when the tweet contains a link to hooroo.com' do
-      let(:tweet_content) { 'Please visit hooroo.com, it is cool.' }
+    context 'when the tweet contains a link to example.com' do
+      let(:tweet_content) { 'Please visit example.com, it is cool.' }
 
       it 'is true' do
         subject.high_value?.should be_true
       end
     end
 
-    context 'when the tweet DOES NOT contain a link to hooroo.com' do
-      let(:tweet_content) { 'Please visit hooroooo.com, it is cool.' }
+    context 'when the tweet DOES NOT contain a link to example.com' do
+      let(:tweet_content) { 'Please visit example.com, it is cool.' }
 
       it 'is false' do
         subject.high_value?.should be_false
       end
     end
 
-    context 'when the tweet contains a shortened link to hooroo.com' do
+    context 'when the tweet contains a shortened link to example.com' do
       let(:tweet_content) { 'Please visit goo.gl/W6tPN, it is cool. Or visit http://bit.ly/L5ePra' }
 
       it 'is true' do

@@ -62,24 +62,17 @@ class UserDecorator < Draper::Decorator
     @twitter ||= TwitterDecoratorFactory.setup_for(user.service_for(:twitter))
   end
 
-  def twitter_url
-  end
-
-  def email
-    hooroo_email || ''
-  end
-
-  def avatar_email
-    user.avatar_email || email
-  end
-
   def achievements
     Queries::AchievementsAndBadgeTakeupForUser.new(user).query.decorate
   end
 
   def avatar_url size=80
-    gravatar_id = Digest::MD5::hexdigest(avatar_email).downcase
-    "http://gravatar.com/avatar/#{gravatar_id}.png?s=#{size}"
+    if user.avatar_url
+      user.avatar_url
+    else
+      gravatar_id = Digest::MD5::hexdigest(email).downcase
+      "http://gravatar.com/avatar/#{gravatar_id}.png?s=#{size}"
+    end
   end
 
   def bio

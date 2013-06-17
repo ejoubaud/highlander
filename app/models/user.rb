@@ -18,9 +18,9 @@ class User < ActiveRecord::Base
   scope :point_earner,    -> { where(earns_points: true) }
   scope :leaderboarder,   -> { where(leaderboarder: true) }
 
-  validates :name,              presence: true
-  validates :hooroo_email,      uniqueness: true, presence: true
-  validates :avatar_email,      uniqueness: true, allow_blank: true
+  validates :name,        presence: true
+  validates :email,       uniqueness: true, presence: true
+  validates :avatar_url,  uniqueness: true, allow_blank: true
 
   before_save :set_role_to_user
 
@@ -44,12 +44,8 @@ class User < ActiveRecord::Base
     @total_badges ||= achievements.count
   end
 
-  def primary_email
-    hooroo_email
-  end
-
   def self.with_email email
-    where("'#{email}' = ANY (emails) OR hooroo_email = '#{email}'").first
+    where("email = '#{email}' OR '#{email}' = ANY (emails)").first
   end
 
   def events_for_metric metric
@@ -68,7 +64,7 @@ class User < ActiveRecord::Base
     update(earns_points: false)
   end
 
-  def left_hooroo!
+  def left_hilander!
     update(leaderboarder: false, earns_points: false)
   end
 

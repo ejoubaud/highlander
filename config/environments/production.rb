@@ -80,9 +80,4 @@ Highlander::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
-
-  config.middleware.use ExceptionNotifier,
-    sender_address: 'hilander-team@hooroo.com',
-    exception_recipients: 'hilander-team@hooroo.com',
-    ignore_exceptions: ExceptionNotifier.default_ignore_exceptions # + [RuntimeError]
 end

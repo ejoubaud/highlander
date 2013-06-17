@@ -1,5 +1,15 @@
 raise 'Only for development yo!' if ENV['RAILS_ENV'] == 'production'
 
+[
+  [ 'Han Solo', 'han@example.com' ],
+  [ 'Chewbacca', 'chewy@example.com' ],
+  [ 'Luke Skywalker', 'luke@example.com' ],
+  [ 'Lando Calrissian', 'lando@example.com' ]
+
+].each do |name, email|
+  User.create!(name: name, email: email)
+end
+
 User.all.each do |user|
   Metric.all.shuffle.take(3).each do |metric|
     count = rand(50)+1
