@@ -8,8 +8,8 @@ module DataMigration
           'github_issue_opened' => '%_github_issue%_opened',
           'github_issue_closed' => '%_github_issue%_closed',
           'jenkins_green_job' => '%_jenkins_green_job%',
-          'ming_pong_victory' => '%_ming_pong_victor%',
-          'ming_pong_loss' => '%_ming_pong_loss%',
+          'ping_pong_victory' => '%_ping_pong_victor%',
+          'ping_pong_loss' => '%_ping_pong_loss%',
           'twitter_mention' => '%_twitter_mention%',
           'pager_duty_ack' => '%_pager_duty_ack%'
 

@@ -56,7 +56,7 @@ module Api
     end
 
     rescue_from Errors::MingPongWinnerAlreadyProcessed do
-      Rails.logger.info "Not awarding points for Ming Pong win. Match: '#{payload.match_id}' for '#{payload.twitter_username}' as it's already been processed"
+      Rails.logger.info "Not awarding points for Ping Pong win. Match: '#{payload.match_id}' for '#{payload.twitter_username}' as it's already been processed"
       render text: 'Match already processed', status: :ok
     end
 

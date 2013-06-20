@@ -8,9 +8,9 @@ module AchievementCalculators
 
       def badges
         {
-          1  => '1_ming_pong_victory',
-          10 => '10_ming_pong_victories',
-          100 => '100_ming_pong_victories'
+          1  => '1_ping_pong_victory',
+          10 => '10_ping_pong_victories',
+          100 => '100_ping_pong_victories'
         }
       end
     end
