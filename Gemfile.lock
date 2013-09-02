@@ -17,6 +17,13 @@ GIT
     rails_log_stdout (0.0.1)
 
 GIT
+  remote: git://github.com/kendagriff/ruby-openid.git
+  revision: 79beaa419d4754e787757f2545331509419e222e
+  ref: 79beaa419d4754e787757f2545331509419e222e
+  specs:
+    ruby-openid (2.2.3)
+
+GIT
   remote: git://github.com/smartinez87/exception_notification.git
   revision: 5d5f035effb8002fe9f3175c184df026b8614044
   specs:
@@ -243,7 +250,6 @@ GEM
       rspec-expectations (~> 2.13.0)
       rspec-mocks (~> 2.13.0)
     ruby-graphviz (1.0.9)
-    ruby-openid (2.2.3)
     ruby-openid-apps-discovery (1.2.0)
       ruby-openid (>= 2.1.7)
     rubyzip (0.9.9)
@@ -340,6 +346,7 @@ DEPENDENCIES
   rails_log_stdout!
   rest-client
   rspec-rails
+  ruby-openid!
   sass-rails (~> 4.0.0)
   stethoscope
   thin
