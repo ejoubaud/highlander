@@ -89,9 +89,9 @@ Highlander::Application.configure do
       exception_recipients: %w{ hello@hilander.io }
     }
 
-  config.cache_store = :dalli_store, ENV["MEMCACHIER_SERVERS"],
-    {
-      username: ENV["MEMCACHIER_USERNAME"],
-      password: ENV["MEMCACHIER_PASSWORD"]
-    }
+  # config.cache_store = :dalli_store, ENV["MEMCACHIER_SERVERS"],
+  #   {
+  #     username: ENV["MEMCACHIER_USERNAME"],
+  #     password: ENV["MEMCACHIER_PASSWORD"]
+  #   }
 end
