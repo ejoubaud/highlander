@@ -86,7 +86,7 @@ Highlander::Application.configure do
     email: {
       email_prefix: "[Hilander] ",
       sender_address: %{"Hilander" <hello@hilander.io>},
-      exception_recipients: %w{ hello@hilander.io }
+      exception_recipients: %w{ marketplacedev@envato.com }
     }
 
   # config.cache_store = :dalli_store, ENV["MEMCACHIER_SERVERS"],
