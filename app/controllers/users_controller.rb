@@ -26,6 +26,10 @@ class UsersController < ApplicationController
     redirect_to user_path(@user.source)
   end
 
+  def add_service
+    redirect_to(user_path(current_user), { notice: "Github added to your account" })
+  end
+
   private
 
     def load_decorated_user

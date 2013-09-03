@@ -13,6 +13,8 @@
     <% end %>
   </h2>
 
+  <%= link_to 'Connect Github', '/auth/github' %>
+
   <%- if @user.twitter.setup? %>
     <h3 class="twitter-handle">
       <%= link_to @user.twitter.handle, @user.twitter.url, target: '_blank' %>
