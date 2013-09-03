@@ -35,7 +35,7 @@ module AchievementCalculators
       end
 
       def user_already_hipster?
-        ::Achievement.where(user: user, badge: hipster_badge).count > 0
+        ::Achievement.where(kinship: kinship, badge: hipster_badge).count > 0
       end
     end
   end

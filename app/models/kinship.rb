@@ -25,6 +25,9 @@ class Kinship < ActiveRecord::Base
     @total_score ||= events.sum(:value)
   end
 
+  def events_for_metric metric
+    events.joins(:metric).where("metrics.name = ?", metric.name)
+  end
 
   private
 
