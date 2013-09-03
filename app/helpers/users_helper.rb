@@ -1,0 +1,14 @@
+module UsersHelper
+
+  def display_github_link?
+    current_user == @user && !@user.github.setup?
+  end
+
+  def profile_subtitle
+    results = []
+    results << link_to(sanitize(@user.twitter.handle), sanitize(@user.twitter.url), target: '_blank') if @user.twitter.setup?
+    results << link_to('Link your Github Account', '/auth/github') if display_github_link?
+    content_tag(:h3, results.join(' - ').html_safe, class: 'profile-subtitle') unless results.empty?
+  end
+
+end
