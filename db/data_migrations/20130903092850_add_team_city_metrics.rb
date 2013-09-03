@@ -3,7 +3,7 @@ module DataMigration
     class AddTeamCityMetrics < Base
 
       def up
-        Metric.create!(name: 'team_city_build_complete', description: 'Build Complete')
+        Metric.create!(name: 'team_city_build_complete', description: 'Green Build')
         Badge.create!(name: '1_green_build', tag: 'Well done, sir', description: 'First Green Build')
         Badge.create!(name: '100_green_builds', tag: 'Green goblin centurion', description: '100 Green Builds')
         Badge.create!(name: '250_green_builds', tag: 'Green goblin class act', description: '250 Green Builds')
