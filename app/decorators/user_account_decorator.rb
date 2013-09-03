@@ -21,31 +21,27 @@ class UserAccountDecorator < Draper::Decorator
     @pager_duty_account ||= user.service_for(:pager_duty).try(:email)
   end
 
-  def attributes=(value)
-    [:twitter_account, :github_account, :instagram_account, :pager_duty_account].each do |blah|
-      puts "Set #{blah} to #{value[blah]}"
-      self.send("#{blah}=", value.delete(blah))
+  def attributes=(params)
+    [:twitter_account, :github_account, :instagram_account, :pager_duty_account].each do |service_name|
+      self.send("#{service_name}=", params.delete(service_name))
     end
 
-    source.attributes = value
+    source.attributes = params
   end
 
-  def save
+  def save!
     transaction do
       save!
-      puts "sdfsfdfsd"
-        update_service(:twitter, @twitter_account)
-        update_service(:github, @github_account)
-        update_service(:instagram, @instagram_account)
-        update_service(:pager_duty, @pager_duty_account)
-      # end
+      update_service(:twitter, @twitter_account)
+      update_service(:github, @github_account)
+      update_service(:instagram, @instagram_account)
+      update_service(:pager_duty, @pager_duty_account)
     end
   end
 
   private
 
   def update_service(name, value)
-    puts "#{name} #{value}"
     if value.present?
       if service = source.service_for(name)
         if service.respond_to?(:username)
@@ -53,8 +49,8 @@ class UserAccountDecorator < Draper::Decorator
         else
           service.email = value
         end
-          
-        service.save!        
+
+        service.save!
       else
         instance = "Services::#{name.to_s.camelize}".constantize.new
         if instance.respond_to?(:username)
@@ -66,8 +62,6 @@ class UserAccountDecorator < Draper::Decorator
         instance.save!
 
         UserService.create!(service: instance, user: source)
-
-        puts "Created!"
       end
     else
       source.service_for(name).destroy

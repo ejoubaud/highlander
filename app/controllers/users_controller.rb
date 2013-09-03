@@ -22,7 +22,7 @@ class UsersController < ApplicationController
     @user = UserAccountDecorator.new(@user)
 
     @user.attributes = user_params
-    @user.save
+    @user.save!
     redirect_to user_path(@user.source)
   end
 
