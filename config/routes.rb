@@ -30,7 +30,7 @@ Highlander::Application.routes.draw do
 
   get   '/signout' => 'sessions#destroy', as: :signout
   post  '/auth/google_apps/callback' => 'sessions#create'
-  get   '/auth/github/callback' => 'users#add_service'
+  get   '/auth/github/callback' => 'users#link_to_github'
 
   # get '/about' => 'high_voltage/pages#show', id: 'about'
 
