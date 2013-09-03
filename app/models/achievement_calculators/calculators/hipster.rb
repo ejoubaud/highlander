@@ -15,7 +15,7 @@ module AchievementCalculators
       private
 
       def hipster!
-        ::Achievement.create!(badge: hipster_badge, user: user, tag: tag)
+        ::Achievement.create!(badge: hipster_badge, user: user, tag: tag, kinship: kinship)
       end
 
       def tag

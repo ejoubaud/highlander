@@ -63,11 +63,11 @@
 
   <p class="badge-spiel">
     <%= @user.first_name %> has unlocked the following
-    <%= @user.badge_count %> badges so far.
+    <%= @kinship.badge_count %> badges so far.
     Keep an eye on this page to see which one comes next!
   </p>
 
-  <%= render partial: 'shared/achievements', locals: { achievements: @kinship.achievements } %>
+  <%= render partial: 'shared/achievements', locals: { achievements: @kinship.achievements.decorate } %>
 
 </section>
 
