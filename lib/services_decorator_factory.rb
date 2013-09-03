@@ -2,7 +2,7 @@ class ServicesDecoratorFactory
 
   def self.setup_for user, service_name
     if user
-      service = user.service_for(:twitter)
+      service = user.service_for(service_name)
       clazz = decorator_class(service_name)
       return clazz.new(service) if service
     end
