@@ -21,12 +21,7 @@ module Api
     private
 
     def validate_payload!
-<<<<<<< HEAD
-      Rails.logger.debug "Payload: #{payload.inspect}"
-=======
       Rails.logger.info "Payload: #{payload.inspect}"
-
->>>>>>> Damnit let me see the payload
       payload.validate!
     end
 
