@@ -7,7 +7,6 @@ module PayloadValidators
       raise Errors::NotAGreenBuild.new(payload) unless payload.green?
     end
 
-
   end
 
 end
