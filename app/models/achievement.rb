@@ -12,4 +12,8 @@ class Achievement < ActiveRecord::Base
     User.where("id IN (#{achievements.to_sql})")
   end
 
+  def badge_takeup
+    users.count
+  end
+
 end
