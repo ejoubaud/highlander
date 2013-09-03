@@ -57,6 +57,7 @@ group :development, :test do
   gem 'letter_opener'
   gem 'rails-erd'
   gem 'heroku'
+  gem 'dotenv-rails'
 end
 
 group :heroku do
