@@ -34,6 +34,7 @@ gem 'stethoscope'
 
 gem 'twitter'
 gem 'omniauth-google-apps'
+gem 'omniauth-github'
 gem 'unshorten'
 
 gem 'dalli'
