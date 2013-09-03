@@ -15,6 +15,14 @@ class UserDecorator < Draper::Decorator
     user.avatar_email || email
   end
 
+  def running_score
+    source.attributes["running_score"] || source.running_score
+  end
+
+  def total_badges
+    source.attributes["total_badges"] || source.total_badges
+  end
+
   def achievements
     Queries::AchievementsAndBadgeTakeupForUser.new(user).query.decorate
   end

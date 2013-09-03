@@ -28,7 +28,7 @@ module Api
 
     def payload
       Rails.logger.info "Params: #{params.inspect}"
-      @payload ||= Factories::PayloadAdapterFactory.for(params)
+      @payload ||= Factories::PayloadAdapterFactory.for(params).tap { |payload| payload.clan = current_clan }
     end
 
   end

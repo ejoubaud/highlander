@@ -1,6 +1,7 @@
 class Event < ActiveRecord::Base
 
   belongs_to :user
+  belongs_to :kinship
   belongs_to :metric
 
   validate :value, numericality: true

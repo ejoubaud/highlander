@@ -3,6 +3,7 @@ module PayloadAdapters
   class Base
 
     delegate :validate!, to: :validator
+    attr_accessor :clan
 
     def initialize(payload = {})
       self.payload = payload
@@ -10,10 +11,11 @@ module PayloadAdapters
 
     def to_event_hash
       {
-        user:   user,
-        metric: metric,
-        value:  value || metric.default_unit,
-        data:   data
+        user:    user,
+        metric:  metric,
+        value:   value || metric.default_unit,
+        data:    data,
+        kinship: kinship
       }
     end
 
@@ -27,6 +29,10 @@ module PayloadAdapters
 
     def user
       @user ||= User.with_email(payload[:email])
+    end
+
+    def kinship
+      @kinship ||= clan.kinships.where(user_id: user.id).first
     end
 
     def data

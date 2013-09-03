@@ -38,7 +38,7 @@
         <h1><%= link_to image_tag("logo.svg", alt: "Hilander"), root_path %>&nbsp;</h1>
 
         <nav>
-          <%- if current_organisation.set? %>
+          <%- if current_clan.present? %>
             <ul>
               <%- if signed_in? -%>
                 <li class="username">Hello there, <strong><%= current_user.name %></strong>!</li>

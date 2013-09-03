@@ -12,37 +12,31 @@ class ApplicationController < ActionController::Base
     params[resource] &&= send(method) if respond_to?(method, true)
   end
 
-  before_filter :set_organisation
-
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to root_url, :alert => exception.message
   end
 
   protected
 
+  def current_clan
+    Clan.where(slug: request.subdomain).first
+  end
+
   def current_user
-    @current_user ||= User.find(session[:user_id]) if signed_in?
+    @current_user ||= current_clan.users.find(session[:user_id]) if signed_in?
   end
 
   def signed_in?
     session[:user_id].present?
   end
 
-  def set_organisation
-    Organisation.instance.name = request.subdomain
-  end
-
-  def current_organisation
-    Organisation.instance
-  end
-
   def unclaimed_bounties
-    Bounty.unclaimed.count
+    Bounty.for_clan(current_clan).unclaimed.count
   end
 
   helper_method :current_user
-  helper_method :current_organisation
   helper_method :unclaimed_bounties
   helper_method :signed_in?
+  helper_method :current_clan
 
 end

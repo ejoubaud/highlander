@@ -32,14 +32,14 @@
   <h2>Scores</h2>
 
   <ul class="scores">
-    <li class="running-score"><span><%= @user.running_score %></span> Running</li>
-    <li class="total-score"><span><%= @user.total_score %></span> All-time</li>
+    <li class="running-score"><span><%= @kinship.running_score %></span> Running</li>
+    <li class="total-score"><span><%= @kinship.total_score %></span> All-time</li>
   </ul>
 
   <h2>Breakdown</h2>
 
   <ul class="metrics">
-    <%- @user.metric_totals.each do |metric_total| %>
+    <%- @user.metric_totals_for_clan(current_clan).each do |metric_total| %>
       <li class="<%= metric_total.description.parameterize %>">
         <%
           # TODO: We can provide point line items too using metric_total.event_total_value
@@ -58,7 +58,7 @@
 
   <h2>
     <%= link_to 'Badges', badges_path %>
-    <strong>(<%= @user.badge_count %>)</strong>
+    <strong>(<%= @kinship.badge_count %>)</strong>
   </h2>
 
   <p class="badge-spiel">
@@ -67,7 +67,7 @@
     Keep an eye on this page to see which one comes next!
   </p>
 
-  <%= render partial: 'shared/achievements', locals: { achievements: @user.achievements } %>
+  <%= render partial: 'shared/achievements', locals: { achievements: @kinship.achievements } %>
 
 </section>
 
