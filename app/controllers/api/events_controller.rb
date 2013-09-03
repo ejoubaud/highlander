@@ -21,10 +21,13 @@ module Api
     private
 
     def validate_payload!
+      Rails.logger.info "Payload: #{payload.inspect}"
+
       payload.validate!
     end
 
     def payload
+      Rails.logger.info "Params: #{params.inspect}"
       @payload ||= Factories::PayloadAdapterFactory.for(params)
     end
 
