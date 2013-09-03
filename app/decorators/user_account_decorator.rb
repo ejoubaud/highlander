@@ -47,8 +47,13 @@ class UserAccountDecorator < Draper::Decorator
   def update_service(name, value)
     puts "#{name} #{value}"
     if value.present?
-      service = if source.service_for(name)
-        service.username = value
+      if service = source.service_for(name)
+        if service.respond_to?(:username)
+          service.username = value
+        else
+          service.email = value
+        end
+          
         service.save!        
       else
         instance = "Services::#{name.to_s.camelize}".constantize.new
