@@ -23,7 +23,6 @@ class UserAccountDecorator < Draper::Decorator
 
   def attributes=(value)
     [:twitter_account, :github_account, :instagram_account, :pager_duty_account].each do |blah|
-      puts "Set #{blah} to #{value[blah]}"
       self.send("#{blah}=", value.delete(blah))
     end
 
@@ -33,19 +32,16 @@ class UserAccountDecorator < Draper::Decorator
   def save
     transaction do
       save!
-      puts "sdfsfdfsd"
-        update_service(:twitter, @twitter_account)
-        update_service(:github, @github_account)
-        update_service(:instagram, @instagram_account)
-        update_service(:pager_duty, @pager_duty_account)
-      # end
+      update_service(:twitter, @twitter_account)
+      update_service(:github, @github_account)
+      update_service(:instagram, @instagram_account)
+      update_service(:pager_duty, @pager_duty_account)
     end
   end
 
   private
 
   def update_service(name, value)
-    puts "#{name} #{value}"
     if value.present?
       if service = source.service_for(name)
         if service.respond_to?(:username)
@@ -67,7 +63,6 @@ class UserAccountDecorator < Draper::Decorator
 
         UserService.create!(service: instance, user: source)
 
-        puts "Created!"
       end
     else
       source.service_for(name).destroy
