@@ -5,10 +5,13 @@ module UsersHelper
   end
 
   def profile_subtitle
-    results = []
-    results << link_to(sanitize(@user.twitter.handle), sanitize(@user.twitter.url), target: '_blank') if @user.twitter.setup?
-    results << link_to('Link your Github Account', '/auth/github') if display_github_link?
-    content_tag(:h3, results.join(' - ').html_safe, class: 'profile-subtitle') unless results.empty?
+    lines = []
+    lines << link_to(sanitize(@user.twitter.handle), sanitize(@user.twitter.url), target: '_blank') if @user.twitter.setup?
+    lines << link_to('Link your Github Account', '/auth/github') if display_github_link?
+    unless lines.empty?
+      subtitle = lines.join(' - ').html_safe
+      content_tag(:h3, subtitle, class: 'profile-subtitle')
+    end
   end
 
 end
