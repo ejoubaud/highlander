@@ -31,6 +31,7 @@ module Highlander
       g.fixture_replacement :factory_girl
     end
 
-    config.cache_store = :dalli_store
+    # config.cache_store = :dalli_store
+    config.cache_store = :memory_store
   end
 end
