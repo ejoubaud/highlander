@@ -4,7 +4,7 @@ class UserDecorator < Draper::Decorator
   delegate_all
 
   def twitter
-    @twitter ||= ServicesDecoratorFactory.setup_for(user, :github)
+    @twitter ||= ServicesDecoratorFactory.setup_for(user, :twitter)
   end
 
   def github
