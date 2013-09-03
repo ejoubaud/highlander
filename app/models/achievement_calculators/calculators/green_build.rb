@@ -9,10 +9,10 @@ module AchievementCalculators
       def badges
         {
           1    => '1_green_build',
-          100  => '100_green_build',
-          250  => '250_green_build',
-          500  => '500_green_build',
-          1000 => '1000_green_build'
+          100  => '100_green_builds',
+          250  => '250_green_builds',
+          500  => '500_green_builds',
+          1000 => '1000_green_builds'
         }
       end
 
