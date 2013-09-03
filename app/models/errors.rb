@@ -27,5 +27,6 @@ module Errors
   class IssueActionNotClosed                   < ApiError ; end
   class PagerDutyAckAlreadyProcessed           < ApiError ; end
   class CodeQualityImprovementAlreadyProcessed < ApiError ; end
+  class NotAGreenBuild                         < ApiError ; end
 
 end
