@@ -12,7 +12,7 @@ class UserDecorator < Draper::Decorator
   end
 
   def email
-    hooroo_email || ''
+    primary_email || ''
   end
 
   def avatar_email

@@ -17,7 +17,7 @@ feature 'Hipster Badge' do
   given(:params) do
     {
       metric: metric.name,
-      email: user.hooroo_email
+      email: user.primary_email
     }
   end
 
@@ -40,8 +40,8 @@ feature 'Hipster Badge' do
   describe "First green job - when another user has the badges already" do
 
     background do
-      page.driver.post endpoint, params.merge(email: existing_user.hooroo_email)
-      page.driver.post endpoint, params.merge(email: user.hooroo_email)
+      page.driver.post endpoint, params.merge(email: existing_user.primary_email)
+      page.driver.post endpoint, params.merge(email: user.primary_email)
     end
 
     scenario "User is given the First Github push, First-time and NO Hipster badges" do

@@ -4,7 +4,7 @@ module DataMigration
 
       def up
         brett = User.find_or_initialize_by_name('Brett Wilkins')
-        brett.hooroo_email = 'brett@hooroo.com'
+        brett.primary_email = 'brett@hooroo.com'
         brett.emails = [ 'brett@hooroo.com', 'brett@brett.geek.nz' ]
         brett.save!
 
