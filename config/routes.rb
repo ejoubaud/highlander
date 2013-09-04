@@ -38,7 +38,7 @@ Highlander::Application.routes.draw do
   #
   # eg. Hooroo, Agile Aus
   #
-  # constraints(subdomain: /^(?!www).+$/) do
+  constraints(subdomain: /^(?!www).+$/) do
 
     resources :users
     resources :badges, only: [ :index, :show ]
@@ -48,15 +48,15 @@ Highlander::Application.routes.draw do
     get '/stats' => 'stats#index', as: :stats
 
     root to: 'welcome#index'
-  # end
+  end
 
   # Routes under this constraint are when no Organisation has been defined,
   # or it's www
   #
-  # constraints(subdomain: /.*/) do
+  constraints(subdomain: /.*/) do
 
-  #   resources :registrations, only: [ :index, :create ]
+    resources :registrations, only: [ :index, :create ]
 
-  #   root to: 'registrations#index', as: 'root_register'
-  # end
+    root to: 'registrations#index', as: 'root_register'
+  end
 end
