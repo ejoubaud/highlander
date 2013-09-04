@@ -44,7 +44,7 @@
     require 'github_api'
     github = Github.new login: login, password: pasword
     github.hooks.create(
-      name: 'Hilander Pushes for <%= current_clan.name %>',
+      name: 'web',
       active: true,
       config: {
         url: 'http://<%= current_clan.slug %>.<%= SITE_ROOT %>/api/github_push.json'
@@ -58,7 +58,7 @@
     require 'github_api'
     github = Github.new login: "github login", password: "github password"
     github.hooks.create(
-      name: 'Hilander Issue Opens for <%= current_clan.name %>',
+      name: 'web',
       active: true,
       config: {
         url: 'http://<%= current_clan.slug %>.<%= SITE_ROOT %>/api/github_issue_opened.json'
@@ -72,7 +72,7 @@
     require 'github_api'
     github = Github.new login: "github login", password: "github password"
     github.hooks.create(
-      name: 'Hilander Issue Closes for <%= current_clan.name %>',
+      name: 'web',
       active: true,
       config: {
         url: 'http://<%= current_clan.slug %>.<%= SITE_ROOT %>/api/github_issue_closed.json'
