@@ -40,7 +40,7 @@
         <nav>
           <%- if current_clan.present? %>
             <ul>
-              <%- if signed_in? -%>
+              <%- if signed_in? && current_user.present? -%>
                 <li class="username">Hello there, <strong><%= current_user.name %></strong>!</li>
                 <li class="bounties"><%= link_to unclaimed_bounties_text, bounties_path %></li>
                 <li><%= link_to 'Account', user_path(current_user) %></li>

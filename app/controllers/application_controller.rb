@@ -30,6 +30,8 @@ class ApplicationController < ActionController::Base
 
   def current_user
     @current_user ||= current_clan.users.find(session[:user_id]) if signed_in?
+  rescue
+    nil
   end
 
   def signed_in?
