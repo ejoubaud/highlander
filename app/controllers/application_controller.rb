@@ -12,6 +12,8 @@ class ApplicationController < ActionController::Base
     params[resource] &&= send(method) if respond_to?(method, true)
   end
 
+  before_filter :ensure_clan_exists
+
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to root_url, :alert => exception.message
   end
@@ -46,6 +48,17 @@ class ApplicationController < ActionController::Base
     @current_ability ||= Ability.new(current_user, current_clan)
   end
 
+  def ensure_clan_exists
+    render_404 unless current_clan.present?
+  end
+
+  def render_404
+    respond_to do |format|
+      format.html { render :file => "#{Rails.root}/public/404", :layout => false, :status => :not_found }
+      format.xml  { head :not_found }
+      format.any  { head :not_found }
+    end
+  end
 
   helper_method :current_user
   helper_method :unclaimed_bounties
