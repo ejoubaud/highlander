@@ -4,11 +4,15 @@ class UserDecorator < Draper::Decorator
   delegate_all
 
   def twitter
-    @twitter ||= TwitterDecoratorFactory.setup_for(user.service_for(:twitter))
+    @twitter ||= ServicesDecoratorFactory.setup_for(user, :twitter)
+  end
+
+  def github
+    @github ||= ServicesDecoratorFactory.setup_for(user, :github)
   end
 
   def email
-    hooroo_email || ''
+    primary_email || ''
   end
 
   def avatar_email
@@ -47,4 +51,5 @@ class UserDecorator < Draper::Decorator
   def last_event_created_at
     user.events.first ? "Last updated on #{user.events.first.created_at.strftime("%B %-d, %Y at %-l:%M %P")}" : ''
   end
+
 end

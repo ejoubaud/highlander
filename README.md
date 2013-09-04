@@ -24,6 +24,10 @@ Hilanders goal is to encourage and promote awesome work through points and badge
 
 ## Development notes
 
+**Some features need environment settings**
+
+Github OAuth needs Application keys... See `.env.sample` for the names of the environment variables to set. You can duplicate `.env.sample` to `.env` and fill in the values so they are loaded automatically in development (see [dotenv Gem](https://github.com/bkeepers/dotenv)).
+
 **We use the data_migrations gem for seed data**
 
 To keep our data migrations seperate from the schema migrations*, we use [ashmckenzie](https://github.com/ashmckenzie)'s [data_migrations](https://github.com/ashmckenzie/data_migration) gem.

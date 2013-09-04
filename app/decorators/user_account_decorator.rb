@@ -21,54 +21,60 @@ class UserAccountDecorator < Draper::Decorator
     @pager_duty_account ||= user.service_for(:pager_duty).try(:email)
   end
 
-  def attributes=(value)
-    [:twitter_account, :github_account, :instagram_account, :pager_duty_account].each do |blah|
-      self.send("#{blah}=", value.delete(blah))
+  def attributes=(params)
+    [:twitter_account, :github_account, :instagram_account, :pager_duty_account].each do |service_name|
+      self.send("#{service_name}=", params.delete(service_name))
     end
 
-    source.attributes = value
+    source.attributes = params
   end
 
-  def save
+  def save!
     transaction do
       save!
-      update_service(:twitter, @twitter_account)
-      update_service(:github, @github_account)
-      update_service(:instagram, @instagram_account)
-      update_service(:pager_duty, @pager_duty_account)
+      set_service(:twitter, @twitter_account)
+      set_service(:github, @github_account)
+      set_service(:instagram, @instagram_account)
+      set_service(:pager_duty, @pager_duty_account)
+    end
+  end
+
+  def set_service(name, value)
+    if value.present?
+      if service = source.service_for(name)
+        update_service(service, value)
+      else
+        add_service(name, value)
+      end
+    else
+      remove_service(name)
     end
   end
 
   private
 
-  def update_service(name, value)
-    if value.present?
-      if service = source.service_for(name)
-        if service.respond_to?(:username)
-          service.username = value
-        else
-          service.email = value
-        end
-          
-        service.save!        
-      else
-        instance = "Services::#{name.to_s.camelize}".constantize.new
-        if instance.respond_to?(:username)
-          instance.username = value
-        else
-          instance.email = value
-        end
-
-        instance.save!
-
-        UserService.create!(service: instance, user: source)
-
-      end
-    else
-      source.service_for(name).destroy
-    end
+  def add_service service_name, value
+    instance = "Services::#{service_name.to_s.camelize}".constantize.new
+    update_service(instance, value)
+    UserService.create!(service: instance, user: source)
   end
 
+  def remove_service service_name
+    source.service_for(service_name).destroy
+  end
+
+  def update_service service, value
+    set_service_value(service, value)
+    service.save!
+  end
+
+  def set_service_value service, value
+    if service.respond_to?(:username)
+      service.username = value
+    else
+      service.email = value
+    end
+  end
 
   # FIXME - Mixin
   class << self

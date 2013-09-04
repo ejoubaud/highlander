@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
 
   def create
     raise "Not an envato email" unless email.ends_with?("@envato.com")
-    user = User.with_email(email) || User.create(name: name, hooroo_email: email, emails: [ email ])
+    user = User.with_email(email) || User.create!(name: name, primary_email: email, emails: [ email ])
 
     clan = Clan.where(slug: params[:state]).first
 
