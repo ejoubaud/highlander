@@ -16,7 +16,7 @@ module DataMigration
 
       def up
         USERS.each do |user|
-          user.left_hooroo!
+          user.left_clan!
         end
       end
 

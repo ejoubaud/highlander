@@ -4,12 +4,9 @@ class SessionsController < ApplicationController
   def create
     user = User.with_email(email) || User.create(name: name, primary_email: email, emails: [ email ])
 
-    # temporarily correct user emails so that primary_email is their Hooroo one
-    unless user.primary_email.ends_with?('@hooroo.com')
-      user.emails = (user.emails + [ user.primary_email ]).flatten.uniq
-      user.primary_email = email
-      user.save!
-    end
+    user.emails = (user.emails + [ user.primary_email ]).flatten.uniq
+    user.primary_email = email
+    user.save!
 
     session[:user_id] = user.id
     redirect_to root_url, notice: "Yay, <strong>#{user.name.split[0]}</strong>! You've successfully signed in to <strong>Hilander</strong>".html_safe
