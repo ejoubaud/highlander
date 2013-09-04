@@ -2,6 +2,7 @@ class SessionsController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   def create
+    raise "Not an envato email" unless email.ends_with?("@envato.com")
     user = User.with_email(email) || User.create!(name: name, primary_email: email, emails: [ email ])
 
     session[:user_id] = user.id
