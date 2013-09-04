@@ -13,6 +13,10 @@ if defined?(Bundler)
   Bundler.require(:default, Rails.env)
 end
 
+# Note, .dev TLD won't be accepted by Google OAuth callbacks, you'll need
+# something like hilanderlocal.com:3000 here and in your hosts file.
+SITE_ROOT = ENV["HILANDER_ROOT"] || "hilander.dev"
+
 module Highlander
   class Application < Rails::Application
 

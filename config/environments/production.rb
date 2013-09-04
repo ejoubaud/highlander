@@ -95,5 +95,3 @@ Highlander::Application.configure do
   #     password: ENV["MEMCACHIER_PASSWORD"]
   #   }
 end
-
-SITE_ROOT = "hilander.envato.com"
