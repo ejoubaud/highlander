@@ -1,5 +1,7 @@
 class RegistrationsController < ApplicationController
 
+  skip_before_filter :ensure_clan_exists
+
   def index
     @registration = Registration.new unless registered?
   end

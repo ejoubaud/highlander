@@ -28,35 +28,35 @@ Highlander::Application.routes.draw do
     end
   end
 
-  get '/signout' => 'sessions#destroy', as: :signout
-  get '/auth/github/callback' => 'users#link_to_github'
-  get '/auth/google_oauth2/callback' => 'sessions#create'
+  get   '/signout' => 'sessions#destroy', as: :signout
+  get   '/auth/google_oauth2/callback' => 'sessions#create'
+  get   '/auth/github/callback' => 'users#link_to_github'
 
   # get '/about' => 'high_voltage/pages#show', id: 'about'
+
+  resources :registrations, only: [ :index, :create ]
+
+  # Routes under this constraint are when no clan is being called
+  # or it's www
+  #
+  constraints(lambda { |req| req.subdomain.blank? || req.host == SITE_ROOT }) do
+
+    root to: 'registrations#index', as: 'root_register'
+
+  end
 
   # Rounds under this constraint are for Organisations
   #
   # eg. Hooroo, Agile Aus
   #
-  constraints(subdomain: /^(?!www).+$/) do
+  constraints(subdomain: /.+/) do
 
     resources :users
     resources :badges, only: [ :index, :show ]
     resources :bounties
-    resource  :clan
-
     get '/stats' => 'stats#index', as: :stats
 
     root to: 'welcome#index'
-  end
 
-  # Routes under this constraint are when no Organisation has been defined,
-  # or it's www
-  #
-  constraints(subdomain: /.*/) do
-
-    resources :registrations, only: [ :index, :create ]
-
-    root to: 'registrations#index', as: 'root_register'
   end
 end
