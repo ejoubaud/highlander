@@ -5,7 +5,7 @@ module Factories
     def self.for(payload, clan)
       "PayloadAdapters::#{payload[:metric].camelize}".constantize.new(payload, clan)
     rescue NameError
-      PayloadAdapters::Base.new(payload)
+      PayloadAdapters::Base.new(payload, clan)
     end
 
     private_class_method :new
