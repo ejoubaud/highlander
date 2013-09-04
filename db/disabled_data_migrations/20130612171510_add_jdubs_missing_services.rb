@@ -4,7 +4,7 @@ module DataMigration
 
       def up
         james = User.find_or_initialize_by_name('James Wolstenholme')
-        james.hooroo_email = 'jamesw@hooroo.com'
+        james.primary_email = 'jamesw@hooroo.com'
         james.save!
 
         twitter = Services::Twitter.new(username: 'jwolstenholme')

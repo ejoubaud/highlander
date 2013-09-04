@@ -1,12 +1,12 @@
 FactoryGirl.define do
 
-  sequence :hooroo_email do |n|
+  sequence :primary_email do |n|
     "person#{n}@hooroo.com"
   end
 
   factory :user do
     name 'Bob Smith'
-    hooroo_email
+    primary_email
     earns_points  true
 
     trait :tweeter do

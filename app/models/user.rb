@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   scope :leaderboarder,   -> { where(leaderboarder: true) }
 
   validates :name,              presence: true
-  validates :hooroo_email,      uniqueness: true, presence: true
+  validates :primary_email,      uniqueness: true, presence: true
   validates :avatar_email,      uniqueness: true, allow_blank: true
 
   before_create :set_role_to_user
@@ -45,11 +45,11 @@ class User < ActiveRecord::Base
   end
 
   def primary_email
-    hooroo_email
+    primary_email
   end
 
   def self.with_email email
-    where("'#{email}' = ANY (emails) OR hooroo_email = '#{email}'").first
+    where("'#{email}' = ANY (emails) OR primary_email = '#{email}'").first
   end
 
   def events_for_metric metric
@@ -68,7 +68,7 @@ class User < ActiveRecord::Base
     update(earns_points: false)
   end
 
-  def left_hooroo!
+  def left_clan!
     update(leaderboarder: false, earns_points: false)
   end
 
