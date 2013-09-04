@@ -2,11 +2,7 @@ class SessionsController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   def create
-    user = User.with_email(email) || User.create(name: name, primary_email: email, emails: [ email ])
-
-    user.emails = (user.emails + [ user.primary_email ]).flatten.uniq
-    user.primary_email = email
-    user.save!
+    user = User.with_email(email) || User.create!(name: name, primary_email: email, emails: [ email ])
 
     session[:user_id] = user.id
     redirect_to root_url, notice: "Yay, <strong>#{user.name.split[0]}</strong>! You've successfully signed in to <strong>Hilander</strong>".html_safe
