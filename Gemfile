@@ -34,6 +34,7 @@ gem 'stethoscope'
 
 gem 'twitter'
 gem 'omniauth-google-apps'
+gem 'omniauth-github'
 gem 'unshorten'
 
 gem 'dalli'
@@ -57,6 +58,7 @@ group :development, :test do
   gem 'letter_opener'
   gem 'rails-erd'
   gem 'heroku'
+  gem 'dotenv-rails'
 end
 
 group :heroku do

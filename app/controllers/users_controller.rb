@@ -22,8 +22,14 @@ class UsersController < ApplicationController
     @user = UserAccountDecorator.new(@user)
 
     @user.attributes = user_params
-    @user.save
+    @user.save!
     redirect_to user_path(@user.source)
+  end
+
+  def link_to_github
+    login = request.env['omniauth.auth']['info']['nickname']
+    UserAccountDecorator.new(current_user).set_service(:github, login)
+    redirect_to(user_path(current_user), { notice: "Github added to your account: #{login}" })
   end
 
   private
