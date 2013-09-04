@@ -46,7 +46,7 @@
                 <li><%= link_to 'Account', user_path(current_user) %></li>
                 <li><%= link_to 'Sign out', signout_path %></li>
               <%- else -%>
-                <li class="sign-in"><a href="/auth/google_apps">Sign in</a></li>
+                <li class="sign-in"><a href="/auth/google_oauth2">Sign in</a></li>
               <%- end -%>
             </ul>
           <% end %>
