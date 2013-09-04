@@ -44,6 +44,9 @@
                 <li class="username">Hello there, <strong><%= current_user.name %></strong>!</li>
                 <li class="bounties"><%= link_to unclaimed_bounties_text, bounties_path %></li>
                 <li><%= link_to 'Account', user_path(current_user) %></li>
+                <% if can? :manage, current_clan %>
+                <li><%= link_to 'Clan', clan_path(current_user) %></li>
+                <% end %>
                 <li><%= link_to 'Sign out', signout_path %></li>
               <%- else -%>
                 <li class="sign-in"><a href="/auth/google_oauth2?state=<%= current_clan.slug %>&redirect_uri=<%= callback_for_google_oauth_uri %>">Sign in</a></li>

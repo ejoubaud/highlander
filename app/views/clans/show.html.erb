@@ -1,0 +1,34 @@
+<%- provide :head do -%>
+   <%= stylesheet_link_tag :clan -%>
+<%- end -%>
+
+<section class="info-block clan-details main-column">
+
+  <h2 class="name">
+    <%= @clan.name %>
+  </h2>
+</section>
+
+<section class="main-column">
+
+  <h2>Kin</h2>
+
+  <%= form_tag clan_path, method: "PUT" do %>
+  <ul>
+  <% @clan.kinships.each do |kin| %>
+  <li>
+    <p class="avatar"><%= image_tag kin.user.decorate.avatar_url 45 %></p>
+    <b><%= kin.user.name %></b>
+    <% if can? :manage, current_clan %>
+      &mdash; <%= select_tag "kin[#{kin.id}][role]", options_for_select(%w( admin user guest ), kin.role) %>
+    <% end %>
+  </li>
+  <% end %>
+  </ul>
+  <% if can? :manage, current_clan %>
+  <br/>
+  <%= submit_tag "Save" %>
+  <% end %>
+  <% end %>
+
+</section>
