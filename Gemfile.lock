@@ -96,6 +96,9 @@ GEM
     diff-lcs (1.2.4)
     domain_name (0.5.11)
       unf (>= 0.0.5, < 1.0.0)
+    dotenv (0.9.0)
+    dotenv-rails (0.9.0)
+      dotenv (= 0.9.0)
     draper (1.2.1)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
@@ -192,6 +195,13 @@ GEM
       omniauth-oauth2
     omniauth-oauth2 (1.1.1)
       oauth2 (~> 0.8.0)
+    omniauth-github (1.1.1)
+      omniauth (~> 1.0)
+      omniauth-oauth2 (~> 1.1)
+    omniauth-oauth2 (1.1.1)
+      oauth2 (~> 0.8.0)
+      omniauth (~> 1.0)
+    omniauth-openid (1.0.1)
       omniauth (~> 1.0)
     pg (0.15.1)
     polyglot (0.3.3)
@@ -313,6 +323,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   dalli
   data_migration!
+  dotenv-rails
   draper
   exception_notification!
   factory_girl_rails
@@ -329,7 +340,12 @@ DEPENDENCIES
   neat
   normalize-rails
   octokit
+<<<<<<< HEAD
   omniauth-google-oauth2
+=======
+  omniauth-github
+  omniauth-google-apps
+>>>>>>> 2be70b65112e2bdb21425b9bcc6e7b23afdde783
   pg
   pry
   pry-debugger

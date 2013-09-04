@@ -22,7 +22,6 @@ module Api
 
     def validate_payload!
       Rails.logger.info "Payload: #{payload.inspect}"
-
       payload.validate!
     end
 
