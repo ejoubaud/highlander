@@ -27,3 +27,6 @@ Highlander::Application.configure do
 
   config.action_mailer.delivery_method = :letter_opener
 end
+
+# Google OAuth won't accept permitted callback urls like blah.hilander.dev.
+SITE_ROOT = "hilanderlocal.com:3000"

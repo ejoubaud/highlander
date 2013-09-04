@@ -5,8 +5,16 @@ class SessionsController < ApplicationController
     raise "Not an envato email" unless email.ends_with?("@envato.com")
     user = User.with_email(email) || User.create(name: name, hooroo_email: email, emails: [ email ])
 
+    clan = Clan.where(slug: params[:state]).first
+
+    if clan.kinship_for_user(user).nil?
+      Kinship.create!(clan: clan, user: user, role: "user")
+    end
+
     session[:user_id] = user.id
-    redirect_to root_url, notice: "Yay, <strong>#{user.name.split[0]}</strong>! You've successfully signed in to <strong>Hilander</strong>".html_safe
+
+    redirect_to "http://#{clan.slug}.#{SITE_ROOT}"
+    # redirect_to root_url, notice: "Yay, <strong>#{user.name.split[0]}</strong>! You've successfully signed in to <strong>Hilander</strong>".html_safe
   end
 
   def destroy

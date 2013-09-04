@@ -19,7 +19,13 @@ class ApplicationController < ActionController::Base
   protected
 
   def current_clan
-    Clan.where(slug: request.subdomain).first
+    subdomain = if request.domain =~ /(.*)\.localhost/
+      $1
+    else
+      request.subdomain
+    end
+
+    Clan.where(slug: subdomain).first
   end
 
   def current_user
@@ -33,6 +39,11 @@ class ApplicationController < ActionController::Base
   def unclaimed_bounties
     Bounty.for_clan(current_clan).unclaimed.count
   end
+
+  def current_ability
+    @current_ability ||= Ability.new(current_user, current_clan)
+  end
+
 
   helper_method :current_user
   helper_method :unclaimed_bounties
