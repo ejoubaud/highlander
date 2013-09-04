@@ -44,10 +44,6 @@ class User < ActiveRecord::Base
     @total_badges ||= achievements.count
   end
 
-  def primary_email
-    hooroo_email
-  end
-
   def self.with_email email
     where("'#{email}' = ANY (emails) OR hooroo_email = '#{email}'").first
   end
