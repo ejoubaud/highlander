@@ -33,14 +33,8 @@ gem 'exception_notification', github: 'smartinez87/exception_notification'
 gem 'stethoscope'
 
 gem 'twitter'
-<<<<<<< HEAD
 gem 'omniauth-github'
-# gem 'omniauth-google-apps'
 gem "omniauth-google-oauth2"
-=======
-gem "omniauth-google-oauth2"
-gem 'omniauth-github'
->>>>>>> bd61698f2ce06071f82ef82903a94d00a8b0ae49
 gem 'unshorten'
 
 gem 'dalli'
