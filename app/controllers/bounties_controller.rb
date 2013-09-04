@@ -5,27 +5,27 @@ class BountiesController < ApplicationController
   load_and_authorize_resource
 
   def index
-    @claimed_bounties = Bounty.claimed.decorate
-    @unclaimed_bounties = Bounty.unclaimed.decorate
+    @claimed_bounties = Bounty.for_clan(current_clan).claimed.decorate
+    @unclaimed_bounties = Bounty.for_clan(current_clan).unclaimed.decorate
   end
 
   def show
   end
 
   def new
-    if Bounty.has_max_allowed?(current_user)
+    if Bounty.for_clan(current_clan).has_max_allowed?(current_user)
       redirect_to bounties_path, flash: { error: "You can only have #{Bounty::MAX_ACTIVE_BOUNTIES} unclaimed bounties at any one time" }
     end
     @bounty = Bounty.new
   end
 
   def edit
-    @users = User.point_earner.order(:name)
+    @users = current_clan.users.point_earner.order(:name)
     raise 'Bounty already claimed' if @bounty.claimed?
   end
 
   def create
-    @bounty = Bounty.new(bounty_params)
+    @bounty = Bounty.for_clan(current_clan).new(bounty_params)
     @bounty.created_by_id = current_user.id
 
     respond_to do |format|

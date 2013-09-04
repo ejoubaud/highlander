@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
 
   has_many :user_services, dependent: :destroy
 
+  has_many :kinships
+
   has_many :bounties_created, class_name: 'Bounty', foreign_key: 'created_by_id'
   has_many :bounties_claimed, class_name: 'Bounty', foreign_key: 'claimed_by_id'
 
@@ -52,8 +54,8 @@ class User < ActiveRecord::Base
     events.joins(:metric).where("metrics.name = ?", metric.name)
   end
 
-  def metric_totals
-    Queries::UserMetricTotals.new(user: self)
+  def metric_totals_for_clan(clan)
+    Queries::UserMetricTotals.new(kinship: self.kinships.for_clan(clan).first)
   end
 
   def can_earn_points!

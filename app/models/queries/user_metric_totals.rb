@@ -2,9 +2,9 @@ module Queries
 
   class UserMetricTotals
 
-    def initialize(relation: Metric.all, user: user)
+    def initialize(relation: Metric.all, kinship: kinship)
       @relation = relation
-      @user     = user
+      @kinship     = kinship
     end
 
     def each(&block)
@@ -13,13 +13,13 @@ module Queries
 
     private
 
-    attr_reader :relation, :user
+    attr_reader :relation, :kinship
 
     def query
       relation
         .select('metrics.id, metrics.description, sum(1) as event_total_count, coalesce(sum(events.value), 0) as event_total_value')
         .joins('left outer join events on events.metric_id = metrics.id')
-        .where('events.user_id = ?', user.id)
+        .where('events.kinship_id = ?', kinship.id)
         .group('metrics.id, metrics.description')
     end
 

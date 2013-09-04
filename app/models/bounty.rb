@@ -23,6 +23,10 @@ class Bounty < ActiveRecord::Base
     self.unclaimed.created_by(user).count >= self::MAX_ACTIVE_BOUNTIES
   end
 
+  def self.for_clan(clan)
+    where(clan_id: clan.id)
+  end
+
   def claimed?
     claimed_by && claimed_at ? true : false
   end

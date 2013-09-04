@@ -1,13 +1,13 @@
 module Queries
   class Stats
 
-    def initialize(user: nil, events: true, achievements: true)
-      @user = user
+    def initialize(kinship: nil, events: true, achievements: true)
+      @kinship = kinship
       @events = events
       @achievements = achievements
 
       @conditions = {}
-      @conditions[:user] = user if user
+      @conditions[:kinship] = kinship if kinship
     end
 
     def each(&block)
