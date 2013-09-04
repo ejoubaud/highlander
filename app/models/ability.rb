@@ -1,10 +1,12 @@
 class Ability
   include CanCan::Ability
 
-  def initialize(user)
+  def initialize(user, clan)
     user ||= User.new
+    clan ||= Clan.new
+    kinship = clan.kinship_for_user(user)
 
-    case user.role
+    case kinship.role
       when 'admin'
         can :manage, :all
 

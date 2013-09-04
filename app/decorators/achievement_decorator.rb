@@ -10,11 +10,11 @@ class AchievementDecorator < Draper::Decorator
   end
 
   def tag
-    achievement.achievement_tag.blank? ? achievement.badge_tag : achievement.achievement_tag.truncate(70, separator: ' ', omission: '…')
+    achievement.tag.blank? ? achievement.badge.tag : achievement.tag.truncate(70, separator: ' ', omission: '…')
   end
 
   def badge_takeup
-    count = (achievement.badge_takeup_count - 1)
+    count = (achievement.badge_takeup - 1)
 
     if count == 0 || achievement.badge.is_hipster_badge? || achievement.badge.is_bounty_badge?
       'The only Hilander with this badge!'

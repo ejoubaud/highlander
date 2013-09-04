@@ -22,6 +22,10 @@ module AchievementCalculators
         achievement.user
       end
 
+      def kinship
+        achievement.kinship || raise("No kinship setup for achievement")
+      end
+
       def achieved_badge
         achievement.badge
       end

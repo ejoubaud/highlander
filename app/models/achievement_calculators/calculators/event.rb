@@ -22,6 +22,10 @@ module AchievementCalculators
         event.user
       end
 
+      def kinship
+        event.kinship || raise("No kinship found for user #{user.name}.")
+      end
+
       private
 
       attr_reader :event
@@ -43,11 +47,11 @@ module AchievementCalculators
       end
 
       def total_event_count
-        user.events_for_metric(metric).count
+        kinship.events_for_metric(metric).count
       end
 
       def add_achievement_for_badge badge, tag=''
-        ::Achievement.create(badge: badge, user: user, tag: tag)
+        ::Achievement.create!(badge: badge, user: user, tag: tag, kinship: kinship)
       end
     end
   end

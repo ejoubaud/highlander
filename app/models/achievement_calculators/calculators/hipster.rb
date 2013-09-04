@@ -15,7 +15,7 @@ module AchievementCalculators
       private
 
       def hipster!
-        ::Achievement.create!(badge: hipster_badge, user: user, tag: tag)
+        ::Achievement.create!(badge: hipster_badge, user: user, tag: tag, kinship: kinship)
       end
 
       def tag
@@ -35,7 +35,7 @@ module AchievementCalculators
       end
 
       def user_already_hipster?
-        ::Achievement.where(user: user, badge: hipster_badge).count > 0
+        ::Achievement.where(kinship: kinship, badge: hipster_badge).count > 0
       end
     end
   end
