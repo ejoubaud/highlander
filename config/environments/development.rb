@@ -29,4 +29,4 @@ Highlander::Application.configure do
 end
 
 # Google OAuth won't accept permitted callback urls like blah.hilander.dev, and blah.localhost:3000 confuses rails session stores.
-SITE_ROOT = "hilanderlocal.com:3000"
+SITE_ROOT = "hilander.hilanderlocal.com:3000"

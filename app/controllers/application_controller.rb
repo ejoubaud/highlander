@@ -21,13 +21,10 @@ class ApplicationController < ActionController::Base
   protected
 
   def current_clan
-    subdomain = if request.domain =~ /(.*)\.localhost/
-      $1
-    else
-      request.subdomain
+    @current_clan ||= begin
+      subdomain = Subdomain.extract_from_request(request)
+      Clan.where(slug: subdomain).first
     end
-
-    Clan.where(slug: subdomain).first
   end
 
   def current_user

@@ -45,7 +45,7 @@
                 <li class="bounties"><%= link_to unclaimed_bounties_text, bounties_path %></li>
                 <li><%= link_to 'Account', user_path(current_user) %></li>
                 <% if can? :manage, current_clan %>
-                <li><%= link_to 'Clan', clan_path(current_user) %></li>
+                <li><%= link_to 'Clan', clan_path %></li>
                 <% end %>
                 <li><%= link_to 'Sign out', signout_path %></li>
               <%- else -%>

@@ -39,7 +39,7 @@ Highlander::Application.routes.draw do
   # Routes under this constraint are when no clan is being called
   # or it's www
   #
-  constraints(lambda { |req| req.subdomain.blank? || req.host == SITE_ROOT }) do
+  constraints(Subdomain::Missing) do #lambda { |req| req.subdomain.blank? || req.subdomain == "www" }) do
 
     root to: 'registrations#index', as: 'root_register'
 
@@ -49,11 +49,13 @@ Highlander::Application.routes.draw do
   #
   # eg. Hooroo, Agile Aus
   #
-  constraints(subdomain: /.+/) do
+  constraints(Subdomain::Present) do
 
     resources :users
     resources :badges, only: [ :index, :show ]
     resources :bounties
+    resource  :clan
+
     get '/stats' => 'stats#index', as: :stats
 
     root to: 'welcome#index'
