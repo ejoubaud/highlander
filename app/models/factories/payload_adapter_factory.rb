@@ -2,8 +2,8 @@ module Factories
 
   class PayloadAdapterFactory
 
-    def self.for(payload)
-      "PayloadAdapters::#{payload[:metric].camelize}".constantize.new(payload)
+    def self.for(payload, clan)
+      "PayloadAdapters::#{payload[:metric].camelize}".constantize.new(payload, clan)
     rescue NameError
       PayloadAdapters::Base.new(payload)
     end

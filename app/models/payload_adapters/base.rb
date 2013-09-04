@@ -5,8 +5,9 @@ module PayloadAdapters
     delegate :validate!, to: :validator
     attr_accessor :clan
 
-    def initialize(payload = {})
+    def initialize(payload = {}, clan = nil)
       self.payload = payload
+      self.clan = clan
     end
 
     def to_event_hash
