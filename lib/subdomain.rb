@@ -1,6 +1,6 @@
 class Subdomain
   def self.extract_from_request(request)
-    current_root = if request.host == 80
+    current_root = if request.port == 80
       request.host
     else
       "#{request.host}:#{request.port}"
