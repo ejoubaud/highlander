@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Highlander::Application.config.secret_key_base = 'fb60bfb1b83e5022f5823e1995f290d2ca78927faeabc4ab89282319a171068d9d340e90bea28b2e054868c8d206e2ca86d9fdfa9cf95e125697aca123249a67'
+Highlander::Application.config.secret_key_base = ENV['RAILS_SECRET_TOKEN']
