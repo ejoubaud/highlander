@@ -2,12 +2,12 @@ class SessionsController < ApplicationController
   skip_before_filter :verify_authenticity_token
 
   def create
-    user = User.with_email(email) || User.create(name: name, hooroo_email: email, emails: [ email ])
+    user = User.with_email(email) || User.create(name: name, primary_email: email, emails: [ email ])
 
-    # temporarily correct user emails so that hooroo_email is their Hooroo one
-    unless user.hooroo_email.ends_with?('@hooroo.com')
-      user.emails = (user.emails + [ user.hooroo_email ]).flatten.uniq
-      user.hooroo_email = email
+    # temporarily correct user emails so that primary_email is their Hooroo one
+    unless user.primary_email.ends_with?('@hooroo.com')
+      user.emails = (user.emails + [ user.primary_email ]).flatten.uniq
+      user.primary_email = email
       user.save!
     end
 

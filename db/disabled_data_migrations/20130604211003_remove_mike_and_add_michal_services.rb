@@ -7,14 +7,14 @@ module DataMigration
         mike.try(:disable!)
 
         michal = User.find_or_initialize_by_name('Michal Pisanko')
-        michal.hooroo_email = 'michal@hooroo.com'
+        michal.primary_email = 'michal@hooroo.com'
         michal.emails = [ 'michal@hooroo.com' ]
         michal.bio = 'The Pole'
         michal.save!
 
         twitter = Services::Twitter.new(username: 'mpisanko')
         github = Services::Github.new(username: 'mpisanko')
-        pager_duty = Services::PagerDuty.new(email: michal.hooroo_email)
+        pager_duty = Services::PagerDuty.new(email: michal.primary_email)
 
         UserService.create!(user: michal, service: twitter)
         UserService.create!(user: michal, service: github)
