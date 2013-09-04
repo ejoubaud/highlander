@@ -23,6 +23,7 @@ class ApplicationController < ActionController::Base
   def current_clan
     @current_clan ||= begin
       subdomain = Subdomain.extract_from_request(request)
+      Rails.logger.info "Loading clan from slug: #{subdomain}"
       Clan.where(slug: subdomain).first
     end
   end
