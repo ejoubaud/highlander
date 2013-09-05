@@ -13,6 +13,7 @@ class Metric < ActiveRecord::Base
     github_push
     github_issue_opened
     github_issue_closed
+    github_pull_request_comment
     jenkins_green_job
     ping_pong_victory
     gift
