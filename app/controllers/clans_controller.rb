@@ -10,21 +10,22 @@ class ClansController < ApplicationController
   end
 
   def update
-    if params[:kin]
-      params[:kin].each do |kin_id, attributes|
-        @clan.kinships.find(kin_id).update_attributes(attributes)
-      end
-    end
-
-
-    if params[:integrations]
-      params[:integrations].each do |name, config|
-        @clan.set_integration_config(name, config)
+    if can? :manage, current_clan
+      if params[:kin]
+        params[:kin].each do |kin_id, attributes|
+          @clan.kinships.find(kin_id).update_attributes(attributes)
+        end
       end
 
-      @clan.save!
-    end
 
+      if params[:integrations]
+        params[:integrations].each do |name, config|
+          @clan.set_integration_config(name, config)
+        end
+
+        @clan.save!
+      end
+    end
 
     redirect_to clan_path
   end
