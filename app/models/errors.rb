@@ -25,6 +25,7 @@ module Errors
   class PingPongLoserAlreadyProcessed          < ApiError ; end
   class IssueActionNotOpened                   < ApiError ; end
   class IssueActionNotClosed                   < ApiError ; end
+  class NonPullRequestIssueComment             < ApiError ; end
   class PagerDutyAckAlreadyProcessed           < ApiError ; end
   class CodeQualityImprovementAlreadyProcessed < ApiError ; end
   class NotAGreenBuild                         < ApiError ; end
