@@ -9,10 +9,10 @@ module AchievementCalculators
       def badges
         {
           1    => '1_lighthouse_ticket_closed',
-          100  => '100_lighthouse_ticket_closed',
-          250  => '250_lighthouse_ticket_closed',
-          500  => '500_lighthouse_ticket_closed',
-          1000 => '1000_lighthouse_ticket_closed'
+          100  => '100_lighthouse_tickets_closed',
+          250  => '250_lighthouse_tickets_closed',
+          500  => '500_lighthouse_tickets_closed',
+          1000 => '1000_lighthouse_tickets_closed'
         }
       end
 
