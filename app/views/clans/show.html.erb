@@ -35,50 +35,50 @@
 
 <section class="main-column">
   <h2>Setup GitHub Metrics</h2>
-  <p>To make things easier, you can use the <code>github_api</code> gem. Examples below refer to this gems usage.</p>
-  <p>To use these code snippets, put your github username and password into the <code>login</code> and <code>password</code> variables respectively, and then just copy and paste away.</p>
+  <p>You'll need curl and a Github account with administrator privileges for your repo.</p>
+  <p>Just copy/paste these in your console and type your password when prompted for it.</p>
 
 
   <h3>Pushes</h3>
   <pre>
-    require 'github_api'
-    github = Github.new login: login, password: pasword
-    github.hooks.create(
-      name: 'web',
-      active: true,
-      config: {
-        url: 'http://<%= current_clan.slug %>.<%= SITE_ROOT %>/api/github_push.json'
-      },
-      events: ['push']
-    )
+    curl -i -u <b>&lt;your_username&gt;</b> -X POST \
+      https://api.github.com/repos/<b>&lt;owner_name&gt;</b>/<b>&lt;repo_name&gt;</b>/hooks \
+      -d '{
+        "name":"web",
+        "active":true,
+        "config": {
+          "url": "http://<%= current_clan.slug %>.<%= SITE_ROOT %>/api/github_push.json"
+        },
+        "events":["push"]
+      }'
   </pre>
 
   <h3>Issue Opens</h3>
   <pre>
-    require 'github_api'
-    github = Github.new login: "github login", password: "github password"
-    github.hooks.create(
-      name: 'web',
-      active: true,
-      config: {
-        url: 'http://<%= current_clan.slug %>.<%= SITE_ROOT %>/api/github_issue_opened.json'
-      },
-      events: ['issues']
-    )
+    curl -i -u <b>&lt;your_username&gt;</b> -X POST \
+      https://api.github.com/repos/<b>&lt;owner_name&gt;</b>/<b>&lt;repo_name&gt;</b>/hooks \
+      -d '{
+        "name":"web",
+        "active":true,
+        "config": {
+          "url": "http://<%= current_clan.slug %>.<%= SITE_ROOT %>/api/github_issue_opened.json"
+        },
+        "events":["issues"]
+      }'
   </pre>
 
   <h3>Issue Closes</h3>
   <pre>
-    require 'github_api'
-    github = Github.new login: "github login", password: "github password"
-    github.hooks.create(
-      name: 'web',
-      active: true,
-      config: {
-        url: 'http://<%= current_clan.slug %>.<%= SITE_ROOT %>/api/github_issue_closed.json'
-      },
-      events: ['issues']
-    )
+    curl -i -u <b>&lt;your_username&gt;</b> -X POST \
+      https://api.github.com/repos/<b>&lt;owner_name&gt;</b>/<b>&lt;repo_name&gt;</b>/hooks \
+      -d '{
+        "name":"web",
+        "active":true,
+        "config": {
+          "url": "http://<%= current_clan.slug %>.<%= SITE_ROOT %>/api/github_issue_closed.json"
+        },
+        "events":["issues"]
+      }'
   </pre>
 
   <h2>TeamCity Builds</h2>
