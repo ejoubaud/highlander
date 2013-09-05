@@ -28,6 +28,16 @@ Hilanders goal is to encourage and promote awesome work through points and badge
 
 Github OAuth needs Application keys... See `.env.sample` for the names of the environment variables to set. You can duplicate `.env.sample` to `.env` and fill in the values so they are loaded automatically in development (see [dotenv Gem](https://github.com/bkeepers/dotenv)).
 
+**hosts file**
+
+This app relies a lot on subdomains. Because of Google Auth, you can't use Pow (Google doesn't like .dev domains). In development, you'll need to add domain `hilanderlocal.com` (or whatever domain is set in env var HILANDER_ROOT) to your host file. You also need to redirect the `www` subdomain (used for Google OAuth redirection) and a subdomain for every clan your plan to use. Example:
+
+`127.0.0.1 localhost hilanderlocal.com www.hilanderlocal.com clan1.hilanderlocal.com`
+
+Finally, you need to access the site in your browser with on the Rails port (e.g. `clan1.hilanderlocal.com:3000`)
+
+The clans also need to exist in the `clans` database table.
+
 **We use the data_migrations gem for seed data**
 
 To keep our data migrations seperate from the schema migrations*, we use [ashmckenzie](https://github.com/ashmckenzie)'s [data_migrations](https://github.com/ashmckenzie/data_migration) gem.
