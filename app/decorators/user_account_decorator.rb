@@ -60,7 +60,7 @@ class UserAccountDecorator < Draper::Decorator
   end
 
   def remove_service service_name
-    source.service_for(service_name).destroy
+    source.service_for(service_name).try(:destroy)
   end
 
   def update_service service, value
