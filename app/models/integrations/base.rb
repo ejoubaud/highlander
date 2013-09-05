@@ -13,7 +13,7 @@ module Integrations
     end
 
     def self.configuration_options
-      self.attribute_set.collect(&:name)
+      self.attribute_set
     end
 
     def configure(clan, options)

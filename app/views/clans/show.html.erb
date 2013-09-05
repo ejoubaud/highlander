@@ -44,8 +44,11 @@
     <% config = @clan.get_integration_config(integration) || Hash.new %>
     <% integration.configuration_options.each do |option| %>
       <p>
-        <label><%= option %></label>
-        <input name="integrations[<%= integration.name %>][<%= option %>]" value="<%= config[option] %>" />
+        <label><%= option.name %></label>
+        <input name="integrations[<%= integration.name %>][<%= option.name %>]" value="<%= config[option] %>" />
+        <% if option.options[:desc] %>
+        <span><%= option.options[:desc] %></span>
+        <% end %>
       </p>
 
     <% end %>

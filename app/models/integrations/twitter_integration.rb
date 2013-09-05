@@ -4,10 +4,11 @@ module Integrations
     attribute :consumer_secret, String
     attribute :oauth_token, String
     attribute :oauth_token_secret, String
+    attribute :keyword_list, String, desc: "Comma separated list of keywords to apply high value (includes unshortened links)"
 
     def execute
       tweets.each do |tweet|
-        post_metric(:twitter_mention, tweet)
+        post_metric(:twitter_mention, tweet.merge(keyword_list: keyword_list))
       end
     end
 
