@@ -15,7 +15,7 @@ end
 
 # Note, .dev TLD won't be accepted by Google OAuth callbacks, you'll need
 # something like hilanderlocal.com:3000 here and in your hosts file.
-SITE_ROOT = ENV["HILANDER_ROOT"] || "hilander.dev"
+SITE_ROOT = ENV["HILANDER_ROOT"] || "hilanderlocal.com:3000"
 
 module Highlander
   class Application < Rails::Application

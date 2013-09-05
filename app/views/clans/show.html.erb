@@ -33,6 +33,32 @@
 
 </section>
 
+<% if can? :manage, current_clan %>
+<section class="main-column">
+  <h2>Integrations</h2>
+
+  <%= form_tag clan_path, method: "PUT" do %>
+  <% [Integrations::TwitterIntegration, Integrations::PagerDutyIntegration, Integrations::CodeClimateIntegration].each do |integration| %>
+    <h3><%= integration.display_name %></h3>
+
+    <% config = @clan.get_integration_config(integration) || Hash.new %>
+    <% integration.configuration_options.each do |option| %>
+      <p>
+        <label><%= option.name %></label>
+        <input name="integrations[<%= integration.name %>][<%= option.name %>]" value="<%= config[option] %>" />
+        <% if option.options[:desc] %>
+        <span><%= option.options[:desc] %></span>
+        <% end %>
+      </p>
+
+    <% end %>
+  <% end %>
+  <%= submit_tag "Update Settings" %>
+  <% end %>
+
+</section>
+<% end %>
+
 <section class="main-column">
   <h2>Setup GitHub Metrics</h2>
   <p>You'll need curl and a Github account with administrator privileges for your repo.</p>

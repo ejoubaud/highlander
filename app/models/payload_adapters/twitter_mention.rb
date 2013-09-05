@@ -18,6 +18,10 @@ module PayloadAdapters
       payload[:text]
     end
 
+    def keyword_list
+      payload[:keyword_list].to_s.split(",").collect(&:strip)
+    end
+
     private
 
     def value
@@ -25,7 +29,7 @@ module PayloadAdapters
     end
 
     def content
-      @content ||= TweetContent.new(text)
+      @content ||= TweetContent.new(text, keyword_list)
     end
 
   end

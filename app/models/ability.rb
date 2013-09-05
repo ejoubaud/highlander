@@ -6,7 +6,7 @@ class Ability
     clan ||= Clan.new
     kinship = clan.kinship_for_user(user)
 
-    case kinship.role
+    case kinship.try(:role)
       when 'admin'
         can :manage, :all
 
