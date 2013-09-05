@@ -3,7 +3,7 @@ module DataMigration
     class AddLighthouseMetrics < Base
 
       def up
-        Metric.create!(name: 'lighthouse_ticket_closed', description: 'Closed Lighthouse Ticket')
+        Metric.create!(name: 'lighthouse_ticket_closed', default_unit: 5, description: 'Closed Lighthouse Ticket')
         Badge.create!(name: '1_lighthouse_ticket_closed', tag: 'Well done, sir', description: 'First Ticket Closed')
         Badge.create!(name: '100_lighthouse_tickets_closed', tag: 'Ticket centurion', description: '100 Tickets Closed')
         Badge.create!(name: '250_lighthouse_tickets_closed', tag: 'Lighthouse Abuser', description: '250 Tickets Closed')
