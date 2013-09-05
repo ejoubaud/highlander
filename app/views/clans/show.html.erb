@@ -45,7 +45,7 @@
     <% integration.configuration_options.each do |option| %>
       <p>
         <label><%= option.name %></label>
-        <input name="integrations[<%= integration.name %>][<%= option.name %>]" value="<%= config[option] %>" />
+        <input name="integrations[<%= integration.name %>][<%= option.name %>]" value="<%= config[option.name] %>" />
         <% if option.options[:desc] %>
         <span><%= option.options[:desc] %></span>
         <% end %>

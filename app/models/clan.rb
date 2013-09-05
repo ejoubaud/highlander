@@ -13,7 +13,7 @@ class Clan < ActiveRecord::Base
   end
 
   def get_integration_config(integration_class)
-    configuration_settings[integration_class.to_s]
+    configuration_settings[integration_class.to_s].try(:with_indifferent_access)
   end
 
   def set_integration_config(integration_class, config)
