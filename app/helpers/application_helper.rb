@@ -20,4 +20,8 @@ module ApplicationHelper
       "http://www.#{SITE_ROOT}/auth/google_oauth2/callback"
     end
   end
+
+  def clan_admin_nav_class?
+    'clan-admin-nav' if can? :manage, current_clan
+  end
 end

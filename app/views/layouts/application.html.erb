@@ -37,7 +37,7 @@
       <div class="container">
         <h1><%= link_to image_tag("logo.svg", alt: "Hilander"), root_path %>&nbsp;</h1>
 
-        <nav>
+        <nav class="<%= clan_admin_nav_class? %>">
           <%- if current_clan.present? %>
             <ul>
               <%- if signed_in? && current_user.present? -%>
