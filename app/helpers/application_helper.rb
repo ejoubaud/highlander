@@ -22,6 +22,6 @@ module ApplicationHelper
   end
 
   def clan_admin_nav_class?
-    'clan-admin-nav' if can? :manage, current_clan
+    'clan-admin-nav' if current_user && can? :manage, current_clan
   end
 end
