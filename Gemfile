@@ -47,6 +47,8 @@ gem 'chartkick'
 
 gem 'rails_12factor'
 
+gem "virtus"
+
 group :development, :test do
   gem 'pry'
   gem 'pry-debugger'

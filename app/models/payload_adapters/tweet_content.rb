@@ -4,8 +4,9 @@ module PayloadAdapters
 
   class TweetContent
 
-    def initialize(content)
+    def initialize(content, high_value_keywords = [])
       @content = content
+      @high_value_keywords = high_value_keywords
     end
 
     def to_s
@@ -13,7 +14,7 @@ module PayloadAdapters
     end
 
     def high_value?
-      links_to_hooro?
+      in_keyword_list?
     end
 
     def shortened_link_matcher
@@ -24,9 +25,8 @@ module PayloadAdapters
 
     attr_reader :content
 
-    # TODO: this needs to be managed outside of code. Refs to Hooroo != good
-    def links_to_hooro?
-      unshortened_content.downcase.include? 'hooroo.com'
+    def in_keyword_list?
+      @high_value_keywords.any? { |keyword| unshortened_content.include?(keyword) }
     end
 
     def unshortened_content
