@@ -29,5 +29,5 @@ module Errors
   class PagerDutyAckAlreadyProcessed           < ApiError ; end
   class CodeQualityImprovementAlreadyProcessed < ApiError ; end
   class NotAGreenBuild                         < ApiError ; end
-
+  class TicketNotClosed                        < ApiError ; end
 end
