@@ -26,6 +26,7 @@ class UsersController < ApplicationController
 
     @user.attributes = user_params
     @user.save!
+
     redirect_to user_path(@user.source)
   end
 

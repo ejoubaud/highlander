@@ -31,7 +31,7 @@ class UserAccountDecorator < Draper::Decorator
 
   def save!
     transaction do
-      save!
+      source.save!
       set_service(:twitter, @twitter_account)
       set_service(:github, @github_account)
       set_service(:instagram, @instagram_account)
