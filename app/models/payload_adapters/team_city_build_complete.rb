@@ -3,15 +3,17 @@ module PayloadAdapters
   class TeamCityBuildComplete < Base
 
     def user
-      @user ||= User.find_by_name(triggered_by)
+      @user ||= Services::Github.find_by_username(triggered_by).try(:user)
+      puts "Reached TeamCityBuildComplete #{@user}"
+      @user
     end
 
     def triggered_by
-      payload[:build][:triggeredBy]
+      payload[:build_triggered_by]
     end
 
     def green?
-      payload[:build][:buildResult] == "success"
+      payload[:build_result] == "success"
     end
 
   end
