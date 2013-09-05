@@ -35,7 +35,7 @@ class ApplicationController < ActionController::Base
   end
 
   def signed_in?
-    session[:user_id].present? || true
+    session[:user_id].present?
   end
 
   def unclaimed_bounties
