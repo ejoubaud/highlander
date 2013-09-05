@@ -1,6 +1,6 @@
 module PayloadValidators
 
-  class GithubIssueOpened < Base
+  class GithubPullRequestComment < Base
 
     def validate!
       super
