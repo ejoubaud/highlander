@@ -34,6 +34,27 @@
 </section>
 
 <section class="main-column">
+  <h2>Integrations</h2>
+
+  <%= form_tag clan_path, method: "PUT" do %>
+  <% [Integrations::TwitterIntegration, Integrations::PagerDutyIntegration, Integrations::CodeClimateIntegration].each do |integration| %>
+    <h3><%= integration.display_name %></h3>
+
+    <% config = @clan.get_integration_config(integration) || Hash.new %>
+    <% integration.configuration_options.each do |option| %>
+      <p>
+        <label><%= option %></label>
+        <input name="integrations[<%= integration.name %>][<%= option %>]" value="<%= config[option] %>" />
+      </p>
+
+    <% end %>
+  <% end %>
+  <%= submit_tag "Update Settings" %>
+  <% end %>
+
+</section>
+
+<section class="main-column">
   <h2>Setup GitHub Metrics</h2>
   <p>To make things easier, you can use the <code>github_api</code> gem. Examples below refer to this gems usage.</p>
   <p>To use these code snippets, put your github username and password into the <code>login</code> and <code>password</code> variables respectively, and then just copy and paste away.</p>

@@ -1,7 +1,7 @@
 class ClansController < ApplicationController
   authorize_resource only: [:edit, :update]
 
-  before_filter :load_decorated_clan, only: [ :show ]
+  before_filter :load_decorated_clan, only: [ :show, :update ]
 
   def show
   end
@@ -10,11 +10,23 @@ class ClansController < ApplicationController
   end
 
   def update
-    params[:kin].each do |kin_id, attributes|
-      current_clan.kinships.find(kin_id).update_attributes(attributes)
+    if params[:kin]
+      params[:kin].each do |kin_id, attributes|
+        @clan.kinships.find(kin_id).update_attributes(attributes)
+      end
     end
 
-    redirect_to clan_path(@clan)
+
+    if params[:integrations]
+      params[:integrations].each do |name, config|
+        @clan.set_integration_config(name, config)
+      end
+
+      @clan.save!
+    end
+
+
+    redirect_to clan_path
   end
 
   private
