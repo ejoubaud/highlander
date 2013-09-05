@@ -18,9 +18,10 @@ module Integrations
 
     def configure(clan, options)
       @current_clan = clan
+      accepted_options = self.class.configuration_options.collect { |opt| opt.name.to_sym }
 
       options.each do |key, value|
-        self.send("#{key}=", value)
+        self.send("#{key}=", value) if accepted_options.include?(key.to_sym)
       end
     end
 
