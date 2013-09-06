@@ -4,8 +4,6 @@ module PayloadAdapters
 
     def user
       @user ||= Services::Github.find_by_username(triggered_by).try(:user)
-      puts "Reached TeamCityBuildComplete #{@user}"
-      @user
     end
 
     def triggered_by
