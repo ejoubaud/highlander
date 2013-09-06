@@ -20,6 +20,7 @@ class User < ActiveRecord::Base
   scope :point_earner,    -> { where(earns_points: true) }
   scope :leaderboarder,   -> { where(leaderboarder: true) }
 
+
   validates :name,              presence: true
   validates :primary_email,      uniqueness: true, presence: true
   validates :avatar_email,      uniqueness: true, allow_blank: true
@@ -28,8 +29,12 @@ class User < ActiveRecord::Base
 
   ROLES = %w[admin user]
 
+  def self.with_service service_name
+    joins(:user_services).where(user_services: {service_type: Services.class_for(:envato).to_s})
+  end
+
   def service_for service_type
-    service_type = "Services::#{service_type.to_s.camelize}"
+    service_type = Services.class_for(service_type).to_s
     user_services.includes(:service).where('user_services.service_type = ?', service_type).first.try(:service)
   end
 

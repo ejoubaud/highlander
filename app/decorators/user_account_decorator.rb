@@ -64,7 +64,7 @@ class UserAccountDecorator < Draper::Decorator
   private
 
   def add_service service_name, value
-    instance = "Services::#{service_name.to_s.camelize}".constantize.new
+    instance = Services.class_for(service_name).new
     update_service(instance, value)
     UserService.create!(service: instance, user: source)
   end

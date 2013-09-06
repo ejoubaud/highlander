@@ -3,15 +3,15 @@ module PayloadAdapters
   class ForumPost < Base
 
     def user
-      @user ||= Services::Envato.find_by_username(envato_username).try(:user)
+      @user ||= Services::Envato.find_by_username(forum_username).try(:user)
     end
 
     def id
-      payload[:id]
+      payload[:post_id]
     end
 
-    def envato_username
-      payload[:user]
+    def forum_username
+      payload[:username]
     end
 
   end
