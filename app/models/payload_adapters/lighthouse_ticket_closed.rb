@@ -7,13 +7,20 @@ module PayloadAdapters
     end
 
     def lighthouse_username
-      payload[:version][:assigned_user_name]
+      payload.try(:[], :version).try(:[], :assigned_user_name)
     end
 
     def closed?
-      payload[:version][:closed] == 'true'
+      payload[:version][:closed]
     end
 
+    def is_a_ticket?
+      payload[:version].present?
+    end
+
+    def previous_state
+      payload[:version][:diffable_attributes].try(:[], :state)
+    end
   end
 
 end
