@@ -7,7 +7,9 @@ module PayloadAdapters
     end
 
     def lighthouse_username
-      payload.try(:[], :version).try(:[], :assigned_user_name)
+      payload[:version][:assigned_user_name]
+    rescue StandardError 
+      raise Errors::InvalidTicket.new(payload) 
     end
 
     def closed?

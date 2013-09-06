@@ -10,8 +10,7 @@ module PayloadValidators
         payload.previous_state.present? && 
         payload.closed? && 
         ENVATOS_CLOSED_STATES.exclude?(payload.previous_state)
-              
-    
+
       raise Errors::TicketNotClosed.new(payload) unless valid
     end
 
