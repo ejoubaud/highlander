@@ -60,6 +60,40 @@
 <% end %>
 
 <section class="main-column">
+  <h2>Setup deploy tracking</h2>
+  <p>These code fragments are designed to be put into your deployment script somewhere. They're in ruby.</p>
+
+  <h3>Identifying user by email in git</h3>
+  <p>This method requires the email registered with github to match the email of the user in your clan.</p>
+  <pre>
+    require 'net/http'
+    email = `git config --global --get user.email`.chomp
+
+    uri = URI.parse("http://<%= current_clan.slug %>.<%= SITE_ROOT %>/api/deploy.json")
+
+    Net::HTTP.start(uri.host, uri.port) do |http|
+      post = Net::HTTP::Post.new(uri.path, initheader = {'Content-Type' =>'application/json'})
+      post.body = { 'email' => email }.to_json
+
+      http.request(post)
+    end
+  </pre>
+
+  <h3>Identifying user by their github username</h3>
+  <p>Your users need to have their github username entered in their account page.</p>
+  <pre>
+    require 'net/http'
+    username = `git config --global --get github.user`.chomp
+
+    uri = URI.parse("http://<%= current_clan.slug %>.<%= SITE_ROOT %>/api/deploy.json")
+
+    Net::HTTP.start(uri.host, uri.port) do |http|
+      post = Net::HTTP::Post.new(uri.path, initheader = {'Content-Type' =>'application/json'})
+      post.body = { 'github_username' => username }.to_json
+
+      http.request(post)
+    end
+  </pre>
   <h2>Setup GitHub Metrics</h2>
   <p>You'll need curl and a Github account with administrator privileges for your repo.</p>
   <p>Just copy/paste these in your console and type your password when prompted for it.</p>
