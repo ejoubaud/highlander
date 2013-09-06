@@ -29,14 +29,13 @@ class ApplicationController < ActionController::Base
   end
 
   def current_user
-    return User.find(2)
     @current_user ||= current_clan.users.find(session[:user_id]) if signed_in?
   rescue
     nil
   end
 
   def signed_in?
-    session[:user_id].present? || true
+    session[:user_id].present?
   end
 
   def unclaimed_bounties
