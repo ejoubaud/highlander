@@ -63,7 +63,7 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      params[:user].permit(:name, :email, :bio, :github_account, :twitter_account, :instagram_account, :pager_duty_account)
+      params[:user].permit(:name, :email, :bio, :github_account, :twitter_account, :instagram_account, :pager_duty_account, :lighthouse_account)
     end
 
 end
