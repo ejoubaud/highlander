@@ -4,7 +4,7 @@ class UserAccountDecorator < Draper::Decorator
   alias :user :source
   delegate_all
 
-  attr_writer :twitter_account, :github_account, :instagram_account, :pager_duty_account
+  attr_writer :twitter_account, :github_account, :instagram_account, :pager_duty_account, :lighthouse_account
 
   def twitter_account
     @twitter_account ||= user.service_for(:twitter).try(:username)
@@ -22,8 +22,12 @@ class UserAccountDecorator < Draper::Decorator
     @pager_duty_account ||= user.service_for(:pager_duty).try(:email)
   end
 
+  def lighthouse_account
+    @lighthouse_account ||= user.service_for(:lighthouse).try(:username)
+  end
+
   def attributes=(params)
-    [:twitter_account, :github_account, :instagram_account, :pager_duty_account].each do |service_name|
+    [:twitter_account, :github_account, :instagram_account, :pager_duty_account, :lighthouse_account].each do |service_name|
       self.send("#{service_name}=", params.delete(service_name))
     end
 
@@ -37,6 +41,7 @@ class UserAccountDecorator < Draper::Decorator
       set_service(:github, @github_account)
       set_service(:instagram, @instagram_account)
       set_service(:pager_duty, @pager_duty_account)
+      set_service(:lighthouse, @lighthouse_account)
     end
   end
 
