@@ -72,7 +72,7 @@ module Api
       render text: 'Lighthouse ticket did not meet closed condition, so was not counted', status: :ok
     end
 
-    recuse_from Errors::InvalidTicket do
+    rescue_from Errors::InvalidTicket do
       render text: 'Lighthouse ticket was not valid', status: :ok
     end
 
