@@ -35,15 +35,15 @@ class User < ActiveRecord::Base
 
   # TODO: this 1.weeks.ago logic is replicated in the RunningLeaderboard query. Simplify.
   def running_score
-    events.where('created_at > ?', 1.weeks.ago.to_s(:db)).sum(:value)
+    attributes["running_score"] || events.where('created_at > ?', 1.weeks.ago.to_s(:db)).sum(:value)
   end
 
   def total_score
-    @total_score ||= events.sum(:value)
+    @total_score ||= (attributes["total_score"] || events.sum(:value))
   end
 
   def badge_count
-    @total_badges ||= achievements.count
+    @total_badges ||= (attributes["badge_count"] || achievements.count)
   end
 
   def self.with_email email
