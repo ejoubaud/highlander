@@ -1,12 +1,8 @@
 module PayloadAdapters
 
-  class GithubPullRequestComment < Base
+  class GithubPullRequestComment < GithubBase
 
-    def user
-      @user ||= Services::Github.find_by_username(commenter_username).try(:user)
-    end
-
-    def commenter_username
+    def github_username
       payload[:sender][:login]
     end
 
