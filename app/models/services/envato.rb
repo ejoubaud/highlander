@@ -1,5 +1,5 @@
 module Services
-  class Github < ActiveRecord::Base
+  class Envato < ActiveRecord::Base
 
     self.table_name = 'envato_services'
 
