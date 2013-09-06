@@ -30,5 +30,7 @@ module Errors
   class CodeQualityImprovementAlreadyProcessed < ApiError ; end
   class NotAGreenBuild                         < ApiError ; end
   class ForumPostAlreadyProcessed              < ApiError ; end
+  class TicketNotClosed                        < ApiError ; end
+  class InvalidTicket                          < ApiError ; end
 
 end

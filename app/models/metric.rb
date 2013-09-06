@@ -23,6 +23,7 @@ class Metric < ActiveRecord::Base
     bounty
     code_quality_improvement
     team_city_build_complete
+    lighthouse_ticket_closed
   }
 
 end
