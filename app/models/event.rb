@@ -21,5 +21,4 @@ class Event < ActiveRecord::Base
     self.user ||= kinship.user
   end
 
-
 end

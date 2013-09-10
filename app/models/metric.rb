@@ -10,6 +10,7 @@ class Metric < ActiveRecord::Base
   default_scope -> { enabled }
 
   NAMES = %w{
+    forum_post
     github_push
     github_issue_opened
     github_issue_closed
