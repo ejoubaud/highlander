@@ -7,7 +7,8 @@ class Integrations < Thor
     integrations = [
       ::Integrations::TwitterIntegration, 
       ::Integrations::PagerDutyIntegration, 
-      ::Integrations::CodeClimateIntegration
+      ::Integrations::CodeClimateIntegration,
+      ::Integrations::EnvatoForumIntegration
     ]
 
     Clan.find_each do |clan|

@@ -141,6 +141,20 @@
       }'
   </pre>
 
+  <h3>Pull Request Comments</h3>
+  <pre>
+    curl -i -u <b>&lt;your_username&gt;</b> -X POST \
+      https://api.github.com/repos/<b>&lt;owner_name&gt;</b>/<b>&lt;repo_name&gt;</b>/hooks \
+      -d '{
+        "name":"web",
+        "active":true,
+        "config": {
+          "url": "http://<%= current_clan.slug %>.<%= SITE_ROOT %>/api/github_pull_request_comment.json"
+        },
+        "events":["pull_request_review_comment","issue_comment"]
+      }'
+  </pre>
+
   <h2>TeamCity Builds</h2>
   <p>You'll need to install the <code>tcWebHooks</code> plugin into your TeamCity environment. From there, setup a webhook to POST JSON to the following endpoint:</p>
   <pre>
@@ -157,5 +171,15 @@
   <p>The url endpoint is:</p>
   <pre>
     http://<%= current_clan.slug %>.<%= SITE_ROOT %>/api/pager_duty_ack
+  </pre>
+
+  <h2>Lighthouse App</h2>
+  <p>Travel to your HTTP Callbacks settings page:</p>
+  <pre>
+    http://&lt;your-organisation&gt;.lighthouseapp.com/callback_handlers
+  </pre>
+  <p>This is the Destination URL you are looking for:</p>
+  <pre>
+    http://<%= current_clan.slug %>.<%= SITE_ROOT %>/api/lighthouse_ticket_closed
   </pre>
 </section>

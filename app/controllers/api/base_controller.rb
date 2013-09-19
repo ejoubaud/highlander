@@ -67,6 +67,14 @@ module Api
     rescue_from Errors::IssueActionNotClosed do
       render text: 'Github issue action was not a close event', status: :ok
     end
+    
+    rescue_from Errors::TicketNotClosed do
+      render text: 'Lighthouse ticket did not meet closed condition, so was not counted', status: :ok
+    end
+
+    rescue_from Errors::InvalidTicket do
+      render text: 'Lighthouse ticket was not valid', status: :ok
+    end
 
     rescue_from Errors::CodeQualityImprovementAlreadyProcessed do
       Rails.logger.info "Not awarding points for Code Quality Improvement. Id: '#{payload.id}' for '#{payload.github_username}' as it's already been processed"

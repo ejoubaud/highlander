@@ -1,10 +1,9 @@
 class UserAccountDecorator < Draper::Decorator
 
-
   alias :user :source
   delegate_all
 
-  attr_writer :twitter_account, :github_account, :instagram_account, :pager_duty_account
+  attr_writer :twitter_account, :github_account, :instagram_account, :pager_duty_account, :envato_account, :lighthouse_account
 
   def twitter_account
     @twitter_account ||= user.service_for(:twitter).try(:username)
@@ -22,8 +21,16 @@ class UserAccountDecorator < Draper::Decorator
     @pager_duty_account ||= user.service_for(:pager_duty).try(:email)
   end
 
+  def envato_account
+    @envato_account ||= user.service_for(:envato).try(:username)
+  end
+
+  def lighthouse_account
+    @lighthouse_account ||= user.service_for(:lighthouse).try(:username)
+  end
+
   def attributes=(params)
-    [:twitter_account, :github_account, :instagram_account, :pager_duty_account].each do |service_name|
+    [:twitter_account, :github_account, :instagram_account, :pager_duty_account, :lighthouse_account, :envato_account].each do |service_name|
       self.send("#{service_name}=", params.delete(service_name))
     end
 
@@ -37,6 +44,8 @@ class UserAccountDecorator < Draper::Decorator
       set_service(:github, @github_account)
       set_service(:instagram, @instagram_account)
       set_service(:pager_duty, @pager_duty_account)
+      set_service(:envato, @envato_account)
+      set_service(:lighthouse, @lighthouse_account)
     end
   end
 
@@ -55,7 +64,7 @@ class UserAccountDecorator < Draper::Decorator
   private
 
   def add_service service_name, value
-    instance = "Services::#{service_name.to_s.camelize}".constantize.new
+    instance = Services.class_for(service_name).new
     update_service(instance, value)
     UserService.create!(service: instance, user: source)
   end

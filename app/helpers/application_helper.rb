@@ -21,6 +21,15 @@ module ApplicationHelper
     end
   end
 
+  def callback_for_github_oauth_uri
+    current_root = if request.port == 80
+      request.host
+    else
+      "#{request.host}:#{request.port}"
+    end
+    "#{current_root}/auth/github/callback"
+  end
+
   def clan_admin_nav_class?
     'clan-admin-nav' if current_user && can?(:manage, current_clan)
   end
