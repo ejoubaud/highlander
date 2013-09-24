@@ -16,9 +16,13 @@ class Clan < ActiveRecord::Base
     configuration_settings[integration_class.to_s].try(:with_indifferent_access)
   end
 
+  def members_emails
+    users.pluck(:primary_email).compact
+  end
+
   def set_integration_config(integration_class, config)
     hash = self.configuration_settings.dup
-    
+
     if config.values.all?(&:blank?)
       hash.delete(integration_class.to_s)
     else
