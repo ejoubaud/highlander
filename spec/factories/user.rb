@@ -4,8 +4,12 @@ FactoryGirl.define do
     "person#{n}@hooroo.com"
   end
 
+  sequence :name do |n|
+    "user#{n}"
+  end
+
   factory :user do
-    name 'Bob Smith'
+    name
     primary_email
     earns_points  true
 
