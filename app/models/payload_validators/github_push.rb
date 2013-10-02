@@ -6,7 +6,8 @@ module PayloadValidators
 
     def validate!
       super
-      raise Errors::InvalidGitBranch.new(payload) unless payload.branch == MASTER_GIT_BRANCH
+      # I'd like to try out recognising non-master pushes.
+      # raise Errors::InvalidGitBranch.new(payload) unless payload.branch == MASTER_GIT_BRANCH
     end
 
     private
