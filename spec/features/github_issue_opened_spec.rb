@@ -2,7 +2,7 @@ require 'spec_helper'
 
 feature 'Github Issue Opened' do
 
-  given(:endpoint) { "http://clan.#{SITE_ROOT}/api/github_issue_opened.json" }
+  given(:endpoint) { api_endpoint('/github_issue_opened.json', 'clan') }
 
   background do
     @first_time_badge                         = FactoryGirl.create(:first_time)

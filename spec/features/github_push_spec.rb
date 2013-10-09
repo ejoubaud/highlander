@@ -2,7 +2,7 @@ require 'spec_helper'
 
 feature 'Github Push' do
 
-  given(:endpoint) { "http://clan.#{SITE_ROOT}/api/github_push.json" }
+  given(:endpoint) { api_endpoint('/github_push.json', 'clan') }
 
   background do
     @first_time_badge       = FactoryGirl.create(:first_time)

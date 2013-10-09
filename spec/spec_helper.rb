@@ -21,6 +21,7 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = true
   config.infer_base_class_for_anonymous_controllers = false
   config.order = "random"
+  config.include UrlHelpers, type: :feature
 
   Capybara.app_host = "http://clan.#{DEFAULT_HOST}"
   ActionDispatch::Integration::Session::DEFAULT_HOST.replace "clan.#{DEFAULT_HOST}"
