@@ -156,7 +156,6 @@ class GithubPayloads
   # Created this hook using:
   # curl -i --user stuliston -X POST -d '{"name": "web", "events": ["issues"], "active": true, "config": {"url": "https://thequickening.herokuapp.com/api/github_issue_opened.json", "content_type": "json"}}' https://api.github.com/repos/hooroo/chef-repo/hooks
   def self.issue_opened(github_username)
-    JSON.parse(
     <<-JSON
       {
         "action": "opened",
@@ -334,13 +333,11 @@ class GithubPayloads
         }
       }
     JSON
-    )
   end
 
   # Created this hook using:
   # curl -i --user stuliston -X POST -d '{"name": "web", "events": ["issues"], "active": true, "config": {"url": "https://thequickening.herokuapp.com/api/github_issue_closed.json", "content_type": "json"}}' https://api.github.com/repos/hooroo/chef-repo/hooks
   def self.issue_closed(github_username)
-    JSON.parse(
     <<-JSON
       {
         "action": "closed",
@@ -518,7 +515,6 @@ class GithubPayloads
         }
       }
     JSON
-    )
   end
 
 end
