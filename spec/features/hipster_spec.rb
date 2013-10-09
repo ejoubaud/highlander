@@ -2,7 +2,7 @@ require 'spec_helper'
 
 feature 'Hipster Badge' do
 
-  given(:endpoint) { '/api/jenkins_green_job.json' }
+  given(:endpoint) { api_endpoint('/jenkins_green_job.json', 'clan') }
 
   background do
     @first_time_badge               = FactoryGirl.create(:first_time)
@@ -11,6 +11,7 @@ feature 'Hipster Badge' do
   end
 
   given(:user)          { FactoryGirl.create(:user) }
+  given!(:clan)         { FactoryGirl.create(:clan, slug: 'clan', users: [user]) }
   given(:existing_user) { FactoryGirl.create(:user, name: 'Jane Smith') }
   given(:metric)        { FactoryGirl.create(:jenkins_green_job) }
 
