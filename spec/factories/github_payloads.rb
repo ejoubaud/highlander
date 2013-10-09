@@ -1,6 +1,6 @@
 class GithubPayloads
 
-  def self.push(email)
+  def self.push(username)
     <<-JSON
       {
         "after":"24f2a159117298d4d8a7bd06d4a2ed2e668b0b45",
@@ -11,14 +11,14 @@ class GithubPayloads
 
              ],
              "author":{
-                "email":"#{email}",
+                "email":"stuliston@hooroo.com",
                 "name":"Stuart Liston",
-                "username":"stuliston"
+                "username":"#{username}"
              },
              "committer":{
-                "email":"#{email}",
+                "email":"stuliston@hooroo.com",
                 "name":"Stuart Liston",
-                "username":"stuliston"
+                "username":"#{username}"
              },
              "distinct":true,
              "id":"47f3eaaadcb2097edf9c2f42dd3cef2cd407fa47",
