@@ -14,7 +14,7 @@ Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
 # If you are not using ActiveRecord, you can remove this line.
 ActiveRecord::Migration.check_pending! if defined?(ActiveRecord::Migration)
 
-DEFAULT_HOST = "hilander.lvh.me"
+DEFAULT_HOST = SITE_ROOT
 
 RSpec.configure do |config|
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
@@ -22,7 +22,8 @@ RSpec.configure do |config|
   config.infer_base_class_for_anonymous_controllers = false
   config.order = "random"
 
-  Capybara.app_host = "http://#{DEFAULT_HOST}"
+  Capybara.app_host = "http://clan.#{DEFAULT_HOST}"
+  ActionDispatch::Integration::Session::DEFAULT_HOST.replace "clan.#{DEFAULT_HOST}"
 end
 
 Capybara.configure do |config|
