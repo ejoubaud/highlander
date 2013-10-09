@@ -7,7 +7,7 @@ module PayloadAdapters
     end
 
     def action
-      payload[:issue_action]
+      payload[:action]
     end
 
   end
