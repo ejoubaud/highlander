@@ -29,6 +29,10 @@ class UserAccountDecorator < Draper::Decorator
     @lighthouse_account ||= user.service_for(:lighthouse).try(:username)
   end
 
+  def team_city_build_username
+    @team_city_account ||= user.service_for(:team_city).try(:username)
+  end
+
   def attributes=(params)
     [:twitter_account, :github_account, :instagram_account, :pager_duty_account, :lighthouse_account, :envato_account].each do |service_name|
       self.send("#{service_name}=", params.delete(service_name))
