@@ -16,6 +16,7 @@ module Errors
 
   class InvalidMetric                          < ApiError ; end
   class UserNotFound                           < ApiError ; end
+  class UserNotFoundButThatsOk                 < ApiError ; end
   class UserNotPointEarner                     < ApiError ; end
   class InvalidGitBranch                       < ApiError ; end
   class TweetInvalid                           < ApiError ; end

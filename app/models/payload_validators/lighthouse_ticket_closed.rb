@@ -2,7 +2,7 @@ module PayloadValidators
 
   class LighthouseTicketClosed < Base
 
-    ENVATOS_CLOSED_STATES = %w{fixed invalid deployed}
+    ENVATOS_CLOSED_STATES = %w{fixed invalid deployed verified}
 
     def validate!
       super
