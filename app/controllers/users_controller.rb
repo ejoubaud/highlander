@@ -38,32 +38,32 @@ class UsersController < ApplicationController
 
   private
 
-    def load_decorated_user
-      @user = user.decorate
-    end
+  def load_decorated_user
+    @user = user.decorate
+  end
 
-    def load_user
-      @user = user
-    end
+  def load_user
+    @user = user
+  end
 
-    def load_decorated_kinship
-      @kinship = kinship.decorate
-    end
+  def load_decorated_kinship
+    @kinship = kinship.decorate
+  end
 
-    def load_kinship
-      @kinship = kinship
-    end
+  def load_kinship
+    @kinship = kinship
+  end
 
-    def user
-      @user ||= User.find(params[:id])
-    end
+  def user
+    @user ||= User.find(params[:id])
+  end
 
-    def kinship
-      @kinship ||= User.find(params[:id]).kinships.for_clan(current_clan).first
-    end
+  def kinship
+    @kinship ||= User.find(params[:id]).kinships.for_clan(current_clan).first
+  end
 
-    def user_params
-      params[:user].permit(:name, :email, :bio, :github_account, :twitter_account, :instagram_account, :pager_duty_account, :envato_account, :lighthouse_account)
-    end
+  def user_params
+    params[:user].permit(:name, :email, :bio, :github_account, :twitter_account, :instagram_account, :pager_duty_account, :envato_account, :lighthouse_account, :team_city_account)
+  end
 
 end
