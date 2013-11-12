@@ -3,7 +3,7 @@ module PayloadAdapters
   class TeamCityBuildComplete < Base
 
     def user
-      @user ||= Services::Github.find_by_username(triggered_by).try(:user)
+      @user ||= Services::TeamCity.find_by_username(triggered_by).try(:user)
     end
 
     def triggered_by
