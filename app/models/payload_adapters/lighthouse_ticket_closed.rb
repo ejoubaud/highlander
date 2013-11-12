@@ -3,7 +3,9 @@ module PayloadAdapters
   class LighthouseTicketClosed < Base
 
     def user
-      @user ||= Services::Lighthouse.find_by_username(lighthouse_username).try(:user)
+      @user ||= Services::Lighthouse.find_by_username(lighthouse_username).user
+    rescue
+      raise Errors::UserNotFoundButThatsOk.new(payload)
     end
 
     def lighthouse_username
