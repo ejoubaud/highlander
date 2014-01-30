@@ -13,7 +13,8 @@ class BountiesController < ApplicationController
   end
 
   def mails
-    render text: NewBountyMailer.notify_user(current_user, current_clan.bounties).body.to_s
+    # render text: UserMailer.new_bounties(current_user, current_clan.bounties).body.to_s
+    render text: UserMailer.leaderboard(current_user, current_clan).body.to_s
   end
 
   def new
