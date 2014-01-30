@@ -12,6 +12,10 @@ class BountiesController < ApplicationController
   def show
   end
 
+  def mails
+    render text: NewBountyMailer.notify_user(current_user, current_clan.bounties).body.to_s
+  end
+
   def new
     if Bounty.for_clan(current_clan).has_max_allowed?(current_user)
       redirect_to bounties_path, flash: { error: "You can only have #{Bounty::MAX_ACTIVE_BOUNTIES} unclaimed bounties at any one time" }

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hilander</title>
+
+    <link rel="stylesheet" type="text/css" href="http://<%= @clan.host %>/assets/application.css">
+    <link rel="stylesheet" type="text/css" href="http://<%= @clan.host %>/assets/bounties.css">
+
+    <%= yield :head %>
+  </head>
+
+  <body>
+
+    <div id="main-container" class="container">
+      <%= yield %>
+    </div>
+
+  </body>
+</html>
