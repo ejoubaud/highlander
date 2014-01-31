@@ -86,7 +86,7 @@ Highlander::Application.configure do
     email: {
       email_prefix: "[Hilander] ",
       sender_address: %{"Hilander" <hello@hilander.io>},
-      exception_recipients: %w{ marketplacedev@envato.com }
+      exception_recipients: ENV["EXCEPTION_RECIPIENTS"].to_s.split(",")
     }
 
   config.action_mailer.delivery_method = :smtp
