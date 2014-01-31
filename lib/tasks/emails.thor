@@ -4,7 +4,7 @@ class Emails < Thor
   def bounties
     require File.join(File.dirname(__FILE__), '../../config/environment')
 
-    Bounty.where('created_at < ?', Time.now - 15.minutes).group_by(&:clan_id).each do |clan_id, bounties|
+    Bounty.where('created_at > ?', Time.now - 15.minutes).group_by(&:clan_id).each do |clan_id, bounties|
       clan = Clan.find(clan_id)
 
       clan.users.each do |user|
@@ -16,6 +16,7 @@ class Emails < Thor
   
   desc 'leaderboard', 'Sends the leaderboard to all clan members for each clan'
   def leaderboard
+    return unless Time.now.utc.wday == 5 # Only on fridays.
     require File.join(File.dirname(__FILE__), '../../config/environment')
 
     Clan.find_each do |clan|
