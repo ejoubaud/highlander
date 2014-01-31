@@ -8,7 +8,7 @@ class Emails < Thor
       clan = Clan.find(clan_id)
 
       clan.users.each do |user|
-        UserMailer.new_bounties(user, bounties).deliver!
+        UserMailer.new_bounties(user, bounties).deliver! rescue nil
       end
     end
   end
@@ -20,7 +20,7 @@ class Emails < Thor
 
     Clan.find_each do |clan|
       clan.users.each do |user|
-        UserMailer.leaderboard(user, clan).deliver!
+        UserMailer.leaderboard(user, clan).deliver! rescue nil
       end
     end
   end
