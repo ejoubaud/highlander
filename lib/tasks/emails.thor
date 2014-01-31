@@ -7,9 +7,9 @@ class Emails < Thor
     Bounty.where('created_at > ?', Time.now - 10.minutes).group_by(&:clan_id).each do |clan_id, bounties|
       clan = Clan.find(clan_id)
 
-      clan.users.each do |user|
+      clan.users.where(send_bounties: true).each do |user|
         begin
-          UserMailer.new_bounties(user, bounties).deliver! if user.send_bounties?
+          UserMailer.new_bounties(user, bounties).deliver!
         rescue
         end
       end
@@ -23,9 +23,9 @@ class Emails < Thor
     require File.join(File.dirname(__FILE__), '../../config/environment')
 
     Clan.find_each do |clan|
-      clan.users.each do |user|
+      clan.users.where(send_leaderboard: true).each do |user|
         begin
-          UserMailer.leaderboard(user, clan).deliver! if user.send_leaderboard?
+          UserMailer.leaderboard(user, clan).deliver!
         rescue
         end
       end
