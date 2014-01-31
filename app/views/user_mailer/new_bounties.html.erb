@@ -1,5 +1,5 @@
 <section class="container bounties">
-	<h1><%= pluralize @bounties.length, "New Bounty" %> in <%= bounty.clan.name %></h1>
+	<h1><%= pluralize @bounties.length, "New Bounty" %> in <%= @clan.name %></h1>
 
 	<% @bounties.each do |bounty| %>
 	<div>
