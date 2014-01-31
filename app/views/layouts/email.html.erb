@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Hilander</title>
+
+    <style type="text/css">
+      <%= Rails.application.assets.find_asset('application.css').to_s.html_safe %>
+
+      <% if @stylesheet %>
+      <%= Rails.application.assets.find_asset(@stylesheet).to_s.html_safe %>
+      <% end %>
+    </style>
+
+    <%= yield :head %>
+  </head>
+
+  <body>
+
+    <div id="main-container" class="container">
+      <%= yield %>
+    </div>
+
+    <div style="text-align: center; padding-top: 10px">
+      <small><%= link_to "Unsubscribe from these emails", edit_user_url(@user.slug, host: @clan.host) %></small>
+    </div>
+
+  </body>
+</html>

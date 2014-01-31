@@ -89,6 +89,14 @@ Highlander::Application.configure do
       exception_recipients: %w{ marketplacedev@envato.com }
     }
 
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :address => ENV["SMTP_HOST"],
+    :port => ENV["SMTP_PORT"],
+    :user_name => ENV["SMTP_USERNAME"]
+    :password => ENV["SMTP_PASSWORD"]
+  }
+
   # config.cache_store = :dalli_store, ENV["MEMCACHIER_SERVERS"],
   #   {
   #     username: ENV["MEMCACHIER_USERNAME"],

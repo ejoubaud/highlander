@@ -20,6 +20,12 @@
       <%= f.text_field :name %>
     </p>
 
+    <p>
+      <%= f.label :emails %><br/>
+      <label><%= f.check_box :send_leaderboard %> Send me the leaderboard on friday</label><br/>
+      <label><%= f.check_box :send_bounties %> Send me bounty notifications</label>
+    </p>
+
     <h2>Services</h2>
 
     <p>

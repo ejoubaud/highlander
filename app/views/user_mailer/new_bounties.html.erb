@@ -1,0 +1,18 @@
+<section class="container bounties">
+	<h1><%= pluralize @bounties.length, "New Bounty" %> in <%= @clan.name %></h1>
+
+	<% @bounties.each do |bounty| %>
+	<div>
+
+		<h2 style="margin-bottom: 1px; margin-top: 30px"><%= bounty.name %></h2>
+	    <p style="float: left; padding-top: 0px"><%= image_tag UserDecorator.new(bounty.created_by).avatar_url 90 %></p>
+	    <div style="padding-left: 120px; padding-top: 0.1px">
+			<% bounty.description.split("\n").reject(&:blank?).each do |line| %>
+			<p><%= line %></p>
+			<% end %>
+			<small>By <%= bounty.created_by.name %> for <b><%= bounty.reward %> points</b></small>
+		</div>
+		<br style="clear: both"/>
+	</div>
+	<% end %>
+</section>

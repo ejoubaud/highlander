@@ -1,6 +1,7 @@
 class Clan < ActiveRecord::Base
   has_many :kinships
   has_many :users, through: :kinships
+  has_many :bounties
 
   serialize :configuration_settings, Hash
 
@@ -26,5 +27,9 @@ class Clan < ActiveRecord::Base
     end
 
     self.configuration_settings = hash
+  end
+
+  def host
+    "#{slug}.#{SITE_ROOT}"
   end
 end
