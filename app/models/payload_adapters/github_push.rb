@@ -7,7 +7,7 @@ module PayloadAdapters
     end
 
     def github_username
-      payload[:commits].first[:author][:username]
+      payload[:commits].first[:author][:username] rescue nil
     end
 
   end
