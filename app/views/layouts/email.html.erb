@@ -20,5 +20,9 @@
       <%= yield %>
     </div>
 
+    <div style="text-align: center; padding-top: 10px">
+      <small><%= link_to "Unsubscribe from these emails", edit_user_url(@user.slug, host: @clan.host) %></small>
+    </div>
+
   </body>
 </html>
