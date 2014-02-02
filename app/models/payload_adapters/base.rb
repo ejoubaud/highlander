@@ -15,7 +15,7 @@ module PayloadAdapters
         user:    user,
         metric:  metric,
         value:   value || metric.default_unit,
-        data:    data_compressed,
+        data:    data,
         kinship: kinship
       }
     end
@@ -47,22 +47,6 @@ module PayloadAdapters
     private
 
     attr_accessor :payload
-
-    def data_compressed
-      if data.to_s.length > 7_000  # postgres maximum 8191, so allow for some overhead.
-        wio = StringIO.new("w")
-        w_gz = Zlib::GzipWriter.new(wio)
-        w_gz.write(JSON.dump(data))
-        w_gz.close
-
-        {
-          "compression" => "gzip",
-          "data" => wio.string
-        }
-      else
-        data
-      end
-    end
 
     def validator
       @validator ||= Factories::PayloadValidatorFactory.for(self)
