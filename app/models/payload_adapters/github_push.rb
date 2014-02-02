@@ -8,7 +8,7 @@ module PayloadAdapters
 
     def github_username
       username = payload[:pusher][:name] rescue nil
-      username || payload[:committers].first rescue nil
+      username || payload[:committers].to_a.sort_by(&:last).last.first rescue nil
     end
 
     def payload=(value)
@@ -26,6 +26,13 @@ module PayloadAdapters
 
       @payload.delete("commits")
       @payload.delete("head_commit")
+
+      # Tally the committers
+      @payload["committers"] = @payload["committers"].inject(Hash.new) do |totals, committer|
+      	totals[committer] ||= 0
+      	totals[committer] += 1
+      	totals
+      end
     end
 
   end
