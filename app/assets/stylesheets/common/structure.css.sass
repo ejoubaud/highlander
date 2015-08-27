@@ -1,0 +1,156 @@
+body
+  background: palette(1, lighten, 25)
+  color: palette(6, darken, 10)
+  -webkit-font-smoothing: antialiased
+
+#main-header
+  background: palette(1, lighten, 25)
+  min-height: 80px
+
+  a
+    color: palette(2)
+
+  h1
+    +span-columns(2)
+    line-height: 80px
+    float: left
+    font-size: 2.2rem
+    margin-bottom: 0
+    margin-top: 0
+    position: relative
+    z-index: 99
+
+    a
+      +hide-text
+      display: block
+      height: 82px
+      position: absolute
+      top: 5px
+      width: 109px
+
+    img
+      height: 100%
+      width: 100%
+
+  nav
+    +span-columns(10)
+    margin-top: 6px
+
+  ul
+    +clearfix
+    list-style: none
+    margin-top: 0
+    padding: 0
+
+  li
+    float: right
+    height: 35px
+    line-height: 35px
+    margin: 0 10px 3px 0
+    width: 65%
+    a
+      +hl-button
+
+    &.username
+      font-size: .9em
+      text-align: right
+      width: 85%
+
+    .count
+      background-color: palette(3, lighten, 5)
+      border-bottom: 1px solid palette(3, lighten, 25)
+      border-radius: 100%
+      border-top: 1px solid palette(3, darken, 30)
+      display: inline-block
+      height: 20px
+      line-height: 20px
+      margin-left: 5px
+      text-shadow: none
+      width: 20px
+
+.hero
+  background: palette(2, $texture: true)
+  clear: both
+  padding-top: 20px
+  padding-bottom: 210px
+  text-align: center
+
+  h2
+    +nice-font
+    color: palette(1, lighten, 25)
+    font-size: 1.75rem
+    line-height: 1.1em
+    padding: 0 1em
+    margin: 0
+    text-shadow: 0 2px 0 palette(3, darken, 10)
+
+  h3
+    +nice-font(regular)
+    color: palette(1, lighten, 25)
+    font-size: 1.2rem
+    line-height: 1.1em
+    margin: .3em 0 0
+    text-shadow: 0 1px 0 palette(4)
+
+
+
+.container
+  +outer-container
+
+#main-container
+  +box-shadow(0 0 10px 0px rgba(palette(4), .2))
+  background: palette(1, lighten, 100)
+  padding-bottom: 30px
+  position: relative
+  z-index: 0
+
+.main-column
+  +span-columns(12)
+
+.sidebar
+  +span-columns(12)
+  clear: both
+
+
+// =================================================
+// -----------------Media Queries-------------------
+// =================================================
++media($not-phone)
+
+  #main-header
+    h1 a
+      height: 137px
+      top: -40px
+      width: 181px
+
+    ul
+      margin-top: 20px
+
+      li
+        +span-columns(2)
+        &.username
+          +span-columns(6)
+        &.sign-in
+          +shift(10)
+
+    .clan-admin-nav
+      li.username
+        +span-columns(4)
+
+  .hero
+    padding-top: 50px
+    h2
+      font-size: 2.5rem
+    h3
+      font-size: 1.5rem
+
+  .sidebar
+    +span-columns(3)
+    border-left: 1px solid rgba(palette(5),.2)
+    margin-right: 0
+    position: absolute
+    right: 0
+    height: 100%
+
+  .main-column
+    +span-columns(9)

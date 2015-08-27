@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <meta name="google" value="notranslate">
+
+    <title>Hilander</title>
+
+    <%= favicon_link_tag %>
+    <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "//www.google.com/jsapi", "chartkick" %>
+    <%= csrf_meta_tags %>
+
+    <%= yield :head %>
+  </head>
+
+  <body>
+
+    <%- unless flash.empty? %>
+      <%- flash.each do |key, msg| %>
+        <%= content_tag(:div, content_tag(:div, content_tag(:p, msg) ), :class => [ key, "flash", "topmost" ]) %>
+      <%- end -%>
+    <%- else -%>
+      <div class="flash warning topmost">
+        <div>
+          <p>Attention shoppers! <strong>Hilander</strong> is still experimental. Your total score may fluctuate as we determine how many points each activity deserves.</p>
+        </div>
+      </div>
+    <%- end -%>
+
+
+    <header id="main-header" class="top-header">
+      <div class="container">
+        <h1><%= link_to image_tag("logo.svg", alt: "Hilander"), root_path %>&nbsp;</h1>
+
+        <nav class="<%= clan_admin_nav_class? %>">
+          <%- if current_clan.present? %>
+            <ul>
+              <%- if signed_in? && current_user.present? -%>
+                <li class="username">Hello there, <strong><%= current_user.name %></strong>!</li>
+                <li class="bounties"><%= link_to unclaimed_bounties_text, bounties_path %></li>
+                <li><%= link_to 'Account', user_path(current_user) %></li>
+                <% if can? :manage, current_clan %>
+                <li><%= link_to 'Clan', clan_path %></li>
+                <% end %>
+                <li><%= link_to 'Sign out', signout_path %></li>
+              <%- else -%>
+                <li class="sign-in"><a href="/auth/google_oauth2?state=<%= current_clan.slug %>&redirect_uri=<%= callback_for_google_oauth_uri %>">Sign in</a></li>
+              <%- end -%>
+            </ul>
+          <% end %>
+        </nav>
+      </div>
+
+    </header>
+
+    <%= yield :pre_main %>
+
+    <div id="main-container" class="container">
+      <%= yield %>
+    </div>
+
+    <%= yield :post_main %>
+
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-39526397-1']);
+      _gaq.push(['_setDomainName', 'hilander.io']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+
+  </body>
+</html>

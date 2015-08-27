@@ -1,0 +1,58 @@
+<%- provide :head do -%>
+   <%= stylesheet_link_tag :registrations -%>
+<%- end -%>
+
+<%- provide :pre_main do -%>
+  <div class="hero">
+    <div class="container">
+      <h2>Have we piqued your interest? Let's stay in touch!</h2>
+      <h3>We've got grand plans for Hilander, and we want to share them with you</h3>
+    </div>
+  </div>
+<%- end -%>
+
+<section class="registrations single-column">
+
+  <% unless @registered %>
+
+    <section class="blurb">
+      <p>We won't be spamming you or anything like that. In fact, you'll only hear from us on <em>really</em> special occasions. Go ahead, fill 'er out and we'll keep you posted about our baby project. Thanks for stopping by!</p>
+    </section>
+
+    <%= form_for(@registration) do |f| %>
+      <% if @registration.errors.any? %>
+          <p class="flash warning">Whoa there! We found <%= pluralize(@registration.errors.count, "error") %>: <strong><%= @registration.errors.full_messages.join(',') %></strong></p>
+      <% end %>
+
+      <p>
+        <%= f.label :email %>
+        <%= f.email_field :email, placeholder: 'your@email.here' %>
+      </p>
+
+      <p class="button-holder">
+        <%= f.button 'Register!', class: 'button large' %>
+      </p>
+
+    <% end %>
+
+  <% end %>
+
+</section>
+
+
+<section class="organisations single-column">
+
+  <h2>Others who've experienced The Quickening:</h2>
+
+  <ul>
+    <li>
+      <%= link_to image_tag(asset_path('third-party-logos/hooroo.png'), alt: "Hooroo Logo" ), organisation_url('hooroo') %>
+      Hooroo
+    </li>
+    <li>
+      <%= link_to image_tag(asset_path('third-party-logos/agile-aus.png'), alt: "Agile Australia Logo" ), organisation_url('agileaus') %>
+      Agile Australia
+    </li>
+  </ul>
+
+</section>

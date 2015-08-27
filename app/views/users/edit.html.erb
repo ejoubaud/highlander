@@ -1,0 +1,73 @@
+<%- provide :head do -%>
+   <%= stylesheet_link_tag :user -%>
+<%- end -%>
+
+<p class="avatar"><%= image_tag @user.source.decorate.avatar_url %></p>
+
+
+<%= form_for @user, :url => { :action => "update" } do |f| %>
+
+  <fieldset>
+
+    <p>
+      <%= f.label :primary_email %>
+      <%= f.text_field :primary_email, disabled: true %>
+      <small>* This is the address we use for your Gravatar image</small>
+    </p>
+
+    <p>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+    </p>
+
+    <p>
+      <%= f.label :emails %><br/>
+      <label><%= f.check_box :send_leaderboard %> Send me the leaderboard on friday</label><br/>
+      <label><%= f.check_box :send_bounties %> Send me bounty notifications</label>
+    </p>
+
+    <h2>Services</h2>
+
+    <p>
+      <%= f.label :github_account %>
+      <%= f.text_field :github_account %>
+    </p>
+
+    <p>
+      <%= f.label :twitter_account %>
+      <%= f.text_field :twitter_account %>
+    </p>
+
+    <p>
+      <%= f.label :instagram_account %>
+      <%= f.text_field :instagram_account %>
+    </p>
+
+    <p>
+      <%= f.label :pager_duty_account %>
+      <%= f.text_field :pager_duty_account %>
+    </p>
+
+    <p>
+      <%= f.label :envato_account %>
+      <%= f.text_field :envato_account %>
+    </p>
+
+    <p>
+      <%= f.label :lighthouse_account %>
+      <%= f.text_field :lighthouse_account %>
+    </p>
+
+    <p>
+      <%= f.label :team_city_account %>
+      <%= f.text_field :team_city_account %>
+    </p>
+
+    <p>
+      <%= f.submit "Save" %>
+      <%= link_to 'cancel', user_path(@user), class: 'hl-button' %>
+    </p>
+
+</fieldset>
+
+<% end %>

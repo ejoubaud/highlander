@@ -1,0 +1,60 @@
+@import "utils"
+@import "common/widgets"
+@import "common/**/*"
+
+#main-container
+  margin-top: -190px
+  padding-top: 10px
+
+.registrations
+  .flash
+    height: auto
+
+.organisations
+
+  h2
+    font-size: 1.6em
+  ul
+    +structural-list
+    overflow: auto
+    text-align: center
+  img
+    border-radius: 100%
+    display: block
+    margin: 20px auto 10px
+
+form
+  margin: 25px 0
+  #error_explanation
+    li
+      list-style: none
+
+  label
+    display: none
+
+  input[type="email"]
+    display: block
+    font-size: 1.6em
+    padding: 10px
+    width: 100%
+
+  textarea
+    height: 150px
+
+  button
+    display: block
+    height: 50px
+    margin-top: 20px
+    width: 100%
+
+// =================================================
+// -----------------Media Queries-------------------
+// =================================================
+
++media($not-phone)
+  #main-container
+    margin-top: -160px
+
+  .organisations li
+    +span-columns(1 of 4)
+    +omega(4n)

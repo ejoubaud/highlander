@@ -1,0 +1,37 @@
+module Errors
+
+  class ApiError < RuntimeError
+
+    attr_reader :payload
+
+    def initialize(payload)
+      @payload = payload
+    end
+
+    def message
+      "#{self.class}: for payload: #{payload}"
+    end
+
+  end
+
+  class InvalidMetric                          < ApiError ; end
+  class UserNotFound                           < ApiError ; end
+  class UserNotFoundButThatsOk                 < ApiError ; end
+  class UserNotPointEarner                     < ApiError ; end
+  class InvalidGitBranch                       < ApiError ; end
+  class TweetInvalid                           < ApiError ; end
+  class TweetAlreadyProcessed                  < ApiError ; end
+  class InvalidRequestSource                   < ApiError ; end
+  class PingPongWinnerAlreadyProcessed         < ApiError ; end
+  class PingPongLoserAlreadyProcessed          < ApiError ; end
+  class IssueActionNotOpened                   < ApiError ; end
+  class IssueActionNotClosed                   < ApiError ; end
+  class NonPullRequestIssueComment             < ApiError ; end
+  class PagerDutyAckAlreadyProcessed           < ApiError ; end
+  class CodeQualityImprovementAlreadyProcessed < ApiError ; end
+  class NotAGreenBuild                         < ApiError ; end
+  class ForumPostAlreadyProcessed              < ApiError ; end
+  class TicketNotClosed                        < ApiError ; end
+  class InvalidTicket                          < ApiError ; end
+
+end

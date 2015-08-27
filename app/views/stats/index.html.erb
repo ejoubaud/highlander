@@ -1,0 +1,7 @@
+<%- provide :head do -%>
+   <%= stylesheet_link_tag :stats -%>
+<%- end -%>
+
+<section class="container stats">
+  <%= render partial: 'shared/stats', locals: { stats: @stats } %>
+</section>

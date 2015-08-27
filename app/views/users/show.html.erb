@@ -1,0 +1,72 @@
+<%- provide :head do -%>
+   <%= stylesheet_link_tag :user -%>
+<%- end -%>
+
+<section class="info-block user-details main-column">
+
+  <p class="avatar"><%= image_tag @user.avatar_url 150 %></p>
+
+  <h2 class="name">
+    <%= link_to @user.name, @user %>
+    <% if can? :edit, @user %>
+      <sup>(<%= link_to 'edit', edit_user_path(current_user) %>)</sup>
+    <% end %>
+  </h2>
+
+  <%= profile_subtitle %>
+
+  <p class="bio">
+    <%= @user.bio %>
+  </p>
+
+  <span class="clrfx"><!-- Confucious say, if clearing span in forest, but no-one there to see it, clearing span exist? --></span>
+
+</section>
+
+<section class="summary sidebar">
+
+  <h2>Scores</h2>
+
+  <ul class="scores">
+    <li class="running-score"><span><%= @kinship.running_score %></span> Running</li>
+    <li class="total-score"><span><%= @kinship.total_score %></span> All-time</li>
+  </ul>
+
+  <h2>Breakdown</h2>
+
+  <ul class="metrics">
+    <%- @user.metric_totals_for_clan(current_clan).each do |metric_total| %>
+      <li class="<%= metric_total.description.parameterize %>">
+        <%
+          # TODO: We can provide point line items too using metric_total.event_total_value
+          # e.g. 20 points for 2 twitter mentions
+        %>
+         <span class="value"><%= metric_total.event_total_count %></span>
+         <span class="times">x</span>
+         <span class="description"><%= metric_total.description %></span>
+      </li>
+    <%- end %>
+  </ul>
+
+</section>
+
+<section class="badges main-column">
+
+  <h2>
+    <%= link_to 'Badges', badges_path %>
+    <strong>(<%= @kinship.badge_count %>)</strong>
+  </h2>
+
+  <p class="badge-spiel">
+    <%= @user.first_name %> has unlocked the following
+    <%= @kinship.badge_count %> badges so far.
+    Keep an eye on this page to see which one comes next!
+  </p>
+
+  <%= render partial: 'shared/achievements', locals: { achievements: @kinship.achievements.decorate } %>
+
+</section>
+
+<section class="stats main-column">
+  <%= render(partial: 'shared/stats_events', locals: { stats: @stats }) if @stats %>
+</section>

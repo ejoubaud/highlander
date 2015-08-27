@@ -1,0 +1,29 @@
+// Main palette
+
+$colours: #ECD078 #EB6248 #C02942 #542437 #099B01 #959595
+// $colours: #F9F2E7 #00A8C6 #40C0CB #AEE239 #8FBE00 #959595
+// $colours: #9FC2D6 #86B4CF #73A2BD #6792AB #DF92D9 #959595
+// $colours: lighten(#A3A948, 25) #CE1836 darken(#F85931, 20) #EDB92E #009989 #959595
+
+
+// Sheeat! This function could be so much smarter if sass was a bit more powerful
+@function palette($colour-number: 3, $operation: normal, $amount: 0, $texture: false)
+  $colour: nth($colours, $colour-number)
+
+  @if $operation == lighten
+    $colour: lighten( $colour, $amount )
+  @else if $operation == darken
+    $colour: darken( $colour, $amount )
+  @if $texture == true
+    $colour: $colour image-url("texture.png") top left repeat
+
+  @return $colour
+
+
+// Flashes
+$flash-warning:          palette(1, lighten, 15)
+$flash-warning-text:     palette(1, darken, 28)
+$flash-error:            rgb(221, 88, 88)
+$flash-error-text:       rgb(45, 45, 45)
+$flash-success:          lighten(#00AA00, 5)
+$flash-success-text:     rgb(33, 94, 27)

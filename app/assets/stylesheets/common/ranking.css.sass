@@ -1,0 +1,123 @@
+.ranking
+  list-style: none
+  padding: 0
+  margin: 0
+  width: 100%
+
+  ul
+    list-style: none
+    padding: 0
+
+.running
+  +nice-font(regular)
+  background: palette(5, lighten, 65)
+  border-bottom: 1px solid rgba(palette(5),.2)
+  color: palette(3)
+  font-size: 1.5rem
+  height: 60px
+  line-height: 60px
+  text-align: center
+  text-shadow: 0 2px 0 palette(1, lighten, 55)
+
+.rankee
+  border-bottom: 1px solid rgba(palette(5),.2)
+  overflow: hidden
+  padding: 1em 0
+  position: relative
+
+  &:nth-child(2n+1)
+    background: palette(5, lighten, 65)
+
+  &:nth-child(2)
+    .rank
+      +nice-font(black)
+      color: palette(5)
+      text-shadow: 0 2px 0 palette(5, darken, 10)
+
+    .scores
+      .total-score, .running-score, .total-badges
+        span
+          color: palette(5)
+
+  p
+    margin: 0
+
+  .rank
+    +span-columns(1 of 8)
+    +nice-font(bold)
+    +omega
+    color: palette(3, lighten, 5)
+    font-size: 1.2rem
+    text-align: center
+    text-shadow: 0 1px 0 palette(4)
+
+  .avatar
+    float: left
+    margin-right: 5%
+
+  img
+    border-radius: $radius
+    display: block
+    width: 50px
+
+  .details
+    +span-columns(5 of 8)
+
+    .name
+      +nice-font(regular)
+      font-size: 1.3rem
+      line-height: 1em
+
+    .bio
+      color: palette(6)
+      display: none
+      font-size: .8rem
+      line-height: 1.3em
+      margin-top: .5em
+
+  .scores
+    list-style: none
+
+    .total-score, .total-badges, .running-score
+      +span-columns(1 of 8)
+      span
+        color: palette(3)
+
+    .total-badges
+      display: none
+
+  .last-updated
+    color: palette(6, lighten, 10)
+    display: none
+    font-size: .7rem
+    margin-top: 1em
+
+
+// =================================================
+// -----------------Media Queries-------------------
+// =================================================
++media($not-phone)
+
+  .rankee
+    &:nth-child(2) .rank
+      font-size: 5.5rem
+
+    .rank
+      font-size: 2.2rem
+      line-height: 90px
+
+    img
+      width: auto
+
+    .details .bio
+      display: block
+
+    .scores
+      .total-score, .total-badges, .running-score
+        margin-top: 2em
+
+      .total-badges
+        display: block
+
+    .last-updated
+      display: block

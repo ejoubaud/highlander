@@ -1,0 +1,11 @@
+<ul class="ranking">
+
+  <li class="running">Weekly running score for <%= @clan.name %></li>
+
+  <%- @users.each_with_index do |user, i| -%>
+    <li class="rankee">
+      <%= render partial: 'shared/rankee', locals: { rankee: OpenStruct.new(user: user.decorate, index: i + 1) } %>
+    </li>
+  <%- end -%>
+
+</ul>

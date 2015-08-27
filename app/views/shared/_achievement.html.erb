@@ -1,0 +1,13 @@
+<%= link_to image_tag(badge_image_url(achievement.badge)), badge_path(achievement.badge) %>
+
+<div class="badge-details">
+  <h3 class="badge-name"><%= achievement.description %></h3>
+  <p class="badge-description"><%= achievement.tag %></p>
+</div>
+
+<div class="achievement-details">
+  <p class="badge-takeup">
+    <%= link_to achievement.badge_takeup, badge_path(achievement.badge) %>
+  </p>
+  <p class="achievement-date"><%= achievement.created_at %> ago</p>
+</div>

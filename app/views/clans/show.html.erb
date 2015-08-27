@@ -1,0 +1,185 @@
+<%- provide :head do -%>
+   <%= stylesheet_link_tag :clan -%>
+<%- end -%>
+
+<section class="info-block clan-details main-column">
+
+  <h2 class="name">
+    <%= @clan.name %>
+  </h2>
+</section>
+
+<section class="main-column">
+
+  <h2>Kin</h2>
+
+  <%= form_tag clan_path, method: "PUT" do %>
+  <ul>
+  <% @clan.kinships.each do |kin| %>
+  <li>
+    <p class="avatar"><%= image_tag kin.user.decorate.avatar_url 45 %></p>
+    <b><%= kin.user.name %></b>
+    <% if can? :manage, current_clan %>
+      &mdash; <%= select_tag "kin[#{kin.id}][role]", options_for_select(%w( admin user guest ), kin.role) %>
+    <% end %>
+  </li>
+  <% end %>
+  </ul>
+  <% if can? :manage, current_clan %>
+  <br/>
+  <%= submit_tag "Update Permissions" %>
+  <% end %>
+  <% end %>
+
+</section>
+
+<% if can? :manage, current_clan %>
+<section class="main-column">
+  <h2>Integrations</h2>
+
+  <%= form_tag clan_path, method: "PUT" do %>
+  <% [Integrations::TwitterIntegration, Integrations::PagerDutyIntegration, Integrations::CodeClimateIntegration].each do |integration| %>
+    <h3><%= integration.display_name %></h3>
+
+    <% config = @clan.get_integration_config(integration) || Hash.new %>
+    <% integration.configuration_options.each do |option| %>
+      <p>
+        <label><%= option.name %></label>
+        <input name="integrations[<%= integration.name %>][<%= option.name %>]" value="<%= config[option.name] %>" />
+        <% if option.options[:desc] %>
+        <span><%= option.options[:desc] %></span>
+        <% end %>
+      </p>
+
+    <% end %>
+  <% end %>
+  <%= submit_tag "Update Settings" %>
+  <% end %>
+
+</section>
+<% end %>
+
+<section class="main-column">
+  <h2>Setup deploy tracking</h2>
+  <p>These code fragments are designed to be put into your deployment script somewhere. They're in ruby.</p>
+
+  <h3>Identifying user by email in git</h3>
+  <p>This method requires the email registered with github to match the email of the user in your clan.</p>
+  <pre>
+    require 'net/http'
+    email = `git config --global --get user.email`.chomp
+
+    uri = URI.parse("http://<%= current_clan.slug %>.<%= SITE_ROOT %>/api/deploy.json")
+
+    Net::HTTP.start(uri.host, uri.port) do |http|
+      post = Net::HTTP::Post.new(uri.path, initheader = {'Content-Type' =>'application/json'})
+      post.body = { 'email' => email }.to_json
+
+      http.request(post)
+    end
+  </pre>
+
+  <h3>Identifying user by their github username</h3>
+  <p>Your users need to have their github username entered in their account page.</p>
+  <pre>
+    require 'net/http'
+    username = `git config --global --get github.user`.chomp
+
+    uri = URI.parse("http://<%= current_clan.slug %>.<%= SITE_ROOT %>/api/deploy.json")
+
+    Net::HTTP.start(uri.host, uri.port) do |http|
+      post = Net::HTTP::Post.new(uri.path, initheader = {'Content-Type' =>'application/json'})
+      post.body = { 'github_username' => username }.to_json
+
+      http.request(post)
+    end
+  </pre>
+  <h2>Setup GitHub Metrics</h2>
+  <p>You'll need curl and a Github account with administrator privileges for your repo.</p>
+  <p>Just copy/paste these in your console and type your password when prompted for it.</p>
+
+
+  <h3>Pushes</h3>
+  <pre>
+    curl -i -u <b>&lt;your_username&gt;</b> -X POST \
+      https://api.github.com/repos/<b>&lt;owner_name&gt;</b>/<b>&lt;repo_name&gt;</b>/hooks \
+      -d '{
+        "name":"web",
+        "active":true,
+        "config": {
+          "url": "http://<%= current_clan.slug %>.<%= SITE_ROOT %>/api/github_push.json"
+        },
+        "events":["push"]
+      }'
+  </pre>
+
+  <h3>Issue Opens</h3>
+  <pre>
+    curl -i -u <b>&lt;your_username&gt;</b> -X POST \
+      https://api.github.com/repos/<b>&lt;owner_name&gt;</b>/<b>&lt;repo_name&gt;</b>/hooks \
+      -d '{
+        "name":"web",
+        "active":true,
+        "config": {
+          "url": "http://<%= current_clan.slug %>.<%= SITE_ROOT %>/api/github_issue_opened.json"
+        },
+        "events":["issues"]
+      }'
+  </pre>
+
+  <h3>Issue Closes</h3>
+  <pre>
+    curl -i -u <b>&lt;your_username&gt;</b> -X POST \
+      https://api.github.com/repos/<b>&lt;owner_name&gt;</b>/<b>&lt;repo_name&gt;</b>/hooks \
+      -d '{
+        "name":"web",
+        "active":true,
+        "config": {
+          "url": "http://<%= current_clan.slug %>.<%= SITE_ROOT %>/api/github_issue_closed.json"
+        },
+        "events":["issues"]
+      }'
+  </pre>
+
+  <h3>Pull Request Comments</h3>
+  <pre>
+    curl -i -u <b>&lt;your_username&gt;</b> -X POST \
+      https://api.github.com/repos/<b>&lt;owner_name&gt;</b>/<b>&lt;repo_name&gt;</b>/hooks \
+      -d '{
+        "name":"web",
+        "active":true,
+        "config": {
+          "url": "http://<%= current_clan.slug %>.<%= SITE_ROOT %>/api/github_pull_request_comment.json"
+        },
+        "events":["pull_request_review_comment","issue_comment"]
+      }'
+  </pre>
+
+  <h2>TeamCity Builds</h2>
+  <p>You'll need to install the <code>tcWebHooks</code> plugin into your TeamCity environment. From there, setup a webhook to POST JSON to the following endpoint:</p>
+  <pre>
+    http://<%= current_clan.slug %>.<%= SITE_ROOT %>/api/team_city_build_complete
+  </pre>
+
+  <h2>CodeClimate</h2>
+  <p>The url endpoint is:</p>
+  <pre>
+    http://<%= current_clan.slug %>.<%= SITE_ROOT %>/api/code_quality_improvement
+  </pre>
+
+  <h2>PagerDuty Acknowledgements</h2>
+  <p>The url endpoint is:</p>
+  <pre>
+    http://<%= current_clan.slug %>.<%= SITE_ROOT %>/api/pager_duty_ack
+  </pre>
+
+  <h2>Lighthouse App</h2>
+  <p>Travel to your HTTP Callbacks settings page:</p>
+  <pre>
+    http://&lt;your-organisation&gt;.lighthouseapp.com/callback_handlers
+  </pre>
+  <p>This is the Destination URL you are looking for:</p>
+  <pre>
+    http://<%= current_clan.slug %>.<%= SITE_ROOT %>/api/lighthouse_ticket_closed
+  </pre>
+</section>
