@@ -26,6 +26,7 @@ module PayloadAdapters
 
       @payload.delete("commits")
       @payload.delete("head_commit")
+      @payload.delete("repository")
 
       # Tally the committers
       @payload["committers"] = @payload["committers"].inject(Hash.new) do |totals, committer|
