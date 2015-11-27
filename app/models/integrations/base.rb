@@ -1,6 +1,6 @@
 module Integrations
   class Base
-    include Virtus
+    include Virtus.model
 
     attr_reader :current_clan
 
