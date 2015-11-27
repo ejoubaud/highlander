@@ -47,7 +47,7 @@ gem 'chartkick'
 
 gem 'rails_12factor'
 
-gem "virtus"
+gem "virtus", '0.5.4'
 
 group :development, :test do
   gem 'pry'
