@@ -96,6 +96,8 @@ Highlander::Application.configure do
     :user_name => ENV["SMTP_USERNAME"],
     :password => ENV["SMTP_PASSWORD"],
     :domain => ENV["SMTP_HELO_DOMAIN"],
+    :authentication => :plain,
+    :enable_starttls_auto => true,
   }
 
   # config.cache_store = :dalli_store, ENV["MEMCACHIER_SERVERS"],
