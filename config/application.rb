@@ -11,6 +11,11 @@ if defined?(Bundler)
   # Bundler.require *Rails.groups(:assets => %w(development test))
   # If you want your assets lazily compiled in production, use this line
   Bundler.require(:default, Rails.env)
+
+  # Allow .env variables to be available at boot time in Development
+  if Rails.env == "development"
+    Dotenv::Railtie.load
+  end
 end
 
 # Note, .dev TLD won't be accepted by Google OAuth callbacks, you'll need
