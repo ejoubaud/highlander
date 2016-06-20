@@ -4,7 +4,8 @@
 
   <%- @users.each_with_index do |user, i| -%>
     <li class="rankee">
-      <%= render partial: 'shared/rankee', locals: { rankee: OpenStruct.new(user: user.decorate, index: i + 1) } %>
+      <%= render partial: 'shared/rankee',
+                 locals: { rankee: OpenStruct.new(user: user.decorate, index: i + 1), host: @clan.host } %>
     </li>
   <%- end -%>
 
