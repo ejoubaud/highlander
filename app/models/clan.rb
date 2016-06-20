@@ -19,7 +19,7 @@ class Clan < ActiveRecord::Base
 
   def set_integration_config(integration_class, config)
     hash = self.configuration_settings.dup
-    
+
     if config.values.all?(&:blank?)
       hash.delete(integration_class.to_s)
     else

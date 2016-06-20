@@ -8,7 +8,7 @@ class UserMailer < ActionMailer::Base
     @clan = bounties.first.clan
 
     @stylesheet = 'bounties.css'
-    mail to: user.primary_email, subject: "[hilander] New bounties offered in #{@clan.name}!"   
+    mail to: user.primary_email, subject: "[hilander] New bounties offered in #{@clan.name}!"
   end
 
   def leaderboard(user, clan)
