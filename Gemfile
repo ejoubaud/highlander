@@ -49,6 +49,10 @@ gem 'rails_12factor'
 
 gem "virtus"
 
+# For proper email rendering in Gmail
+gem 'nokogiri'
+gem 'premailer-rails'
+
 group :development, :test do
   gem 'pry'
   gem 'pry-debugger'
