@@ -67,4 +67,19 @@ _(consider adding a wiki page for this)_
 
 TBC
 
+## Troubleshooting
+
+### Can't install the `eventmachine` gem
+
+If you see an error similar to this:
+
+`fatal error: 'openssl/ssl.h' file not found`
+
+Make sure that you use OS X's bundled OpenSSL libraries. Run `bundle config build.eventmachine --with-cppflags=-I/usr/local/opt/openssl/include` then run `bundle install` again, or alternatively, install the gem directly using `gem install eventmachine -- --with-cppflags=-I/usr/local/opt/openssl/include`.
+
+### Can't install the `pg` gem
+
+Make sure `postgresql` is installed. This is bundled with some projects included in Boxen, but if you don't have any, you can run `brew install postgresql`.
+
+
 
