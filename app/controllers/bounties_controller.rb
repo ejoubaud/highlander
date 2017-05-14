@@ -35,6 +35,7 @@ class BountiesController < ApplicationController
 
     respond_to do |format|
       if @bounty.save
+        BountyMailer.new_bounty(current_user, current_clan, @bounty).deliver
         format.html { redirect_to bounties_path, notice: 'Bounty was successfully created.' }
       else
         format.html { render action: 'new' }

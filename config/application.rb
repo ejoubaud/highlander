@@ -36,6 +36,12 @@ module Highlander
 
     config.autoload_paths << File.join(Rails.root, 'lib')
 
+    config.action_mailer.default_url_options = {
+      host: SITE_ROOT,
+    }
+
+    default_url_options
+
     config.generators do |g|
       g.fixture_replacement :factory_girl
     end

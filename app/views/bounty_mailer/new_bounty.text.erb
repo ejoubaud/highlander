@@ -1,0 +1,21 @@
+Awrite, mighty clansmen and clanswomen!
+
+
+I just posted a new bounty:
+
+
+<%= @bounty.name %>
+
+<%= @bounty.description %>
+
+Reward: <%= @bounty.reward %> points
+
+
+Prove your value and claim your bounty there: <%= url_for bounties_path(only_path: false, subdomain: @clan.slug) %>
+
+
+Guid Luck!
+
+Your fellow clans(wo)man,
+
+<%= @creator.name %>
