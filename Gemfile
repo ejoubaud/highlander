@@ -28,6 +28,7 @@ gem 'mechanize'
 gem 'octokit'
 gem 'naught'
 gem 'high_voltage'
+gem 'sprockets', '>= 2.12.5'
 
 gem 'exception_notification', github: 'smartinez87/exception_notification'
 gem 'stethoscope'
